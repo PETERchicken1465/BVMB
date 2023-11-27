@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DatVe.Models.tb_MayBay>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@helper Truncate(string s, int length)
+{if (s.Length < length)
+    {@s}
+else
+{@s.Substring(0, length)<text>....</text>}}
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    Loại máy bay
+                </th>
+                <th>
+                    Số Hiệu
+                </th>
+                @*<th>
+                   HangNhat
+                </th>
+                <th>
+                  ThuongGia
+                </th>
+                <th>
+                   PTDB
+                </th>
+                <th>
+                    PT
+                </th>*@
+                <th>
+                    hãng
+                </th>
+                <th>
+                    Mô Tả
+                </th>
+                <th>
+                    Ngày sử dụng
+                </th>
+                <th>
+                    Ngày hết hạn
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoaiMayBay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoHieu)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.SoGheHangNhat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoGheHangThuongGia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoGheHangPTDB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoGheHangPT)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HangSX)
+                    </td>
+                    <td>
+                        @Truncate(Html.Raw(item.MoTa.Replace("\n", "")).ToString(), 10)
+                    </td>
+                    <td>
+                        @Html.FormatValue(@item.NgaySuDung, "{0:dd/MM/yyyy}")
+                    </td>
+                    <td>
+                        @Html.FormatValue(@item.NgayHetHan, "{0:dd/MM/yyyy}")
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.MaMayBay })" class="btn btn-warning" role="button">Sửa</a>
+                        <a href="@Url.Action("Delete", new { id = item.MaMayBay })" class="btn btn-danger" role="button">Xóa</a>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

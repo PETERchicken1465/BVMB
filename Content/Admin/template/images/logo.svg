@@ -1,0 +1,6 @@
+<svg width="118" height="18" viewBox="0 0 118 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- ... (your existing path elements) ... -->
+
+    <!-- Adding the larger text "Cloud_A" -->
+    <text x="10" y="15" font-family="Manrope, sans-serif;" font-weight="500" font-size="20" fill="black">Cloud_ABC</text>
+</svg>
