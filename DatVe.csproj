@@ -1884,6 +1884,16 @@
     <Content Include="Areas\Admin\Views\ToBay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tuyenbay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\test\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SanBay\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SanBay\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SanBay\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Tuyenbay\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Tuyenbay\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tuyenbay\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Maybay\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Maybay\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Maybay\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Maybay\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

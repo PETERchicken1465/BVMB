@@ -61,19 +61,7 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.SoHieu)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.SoGheHangNhat)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SoGheHangThuongGia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SoGheHangPTDB)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SoGheHangPT)
-                    </td>*@
+                    </td>                   
                     <td>
                         @Html.DisplayFor(modelItem => item.HangSX)
                     </td>
@@ -88,6 +76,7 @@ else
                     </td>
                     <td>
                         <a href="@Url.Action("Edit", new { id = item.MaMayBay })" class="btn btn-warning" role="button">Sửa</a>
+                        <a href="@Url.Action("Detail", new { id = item.MaMayBay })" class="btn btn-warning" role="button">Cr_Seat</a>
                         <a href="@Url.Action("Delete", new { id = item.MaMayBay })" class="btn btn-danger" role="button">Xóa</a>
 
                     </td>

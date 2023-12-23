@@ -1,0 +1,57 @@
+﻿@model DatVe.Models.tb_MayBay
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Tạo Ghế Máy Bay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiMayBay)_ @Html.DisplayFor(model => model.SoHieu)_  @Html.DisplayFor(model => model.HangSX)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoGheHangNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoGheHangNhat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoGheHangThuongGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoGheHangThuongGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoGheHangPTDB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoGheHangPTDB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoGheHangPT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoGheHangPT)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaMayBay }, new { @class = "btn btn-danger" }) |
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+</div>

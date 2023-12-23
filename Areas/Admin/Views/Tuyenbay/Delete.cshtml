@@ -1,0 +1,46 @@
+﻿@model DatVe.Models.tb_TuyenBay
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <h2>Xóa Tuyến Bay</h2>
+
+
+        <div>
+            <h4>tb_TuyenBay</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.tb_SanBay.TenSanBay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_SanBay.TenSanBay)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tb_SanBay1.TenSanBay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_SanBay1.TenSanBay)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+</div>
+</div>
