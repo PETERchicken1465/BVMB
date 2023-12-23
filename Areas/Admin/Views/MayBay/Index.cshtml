@@ -15,8 +15,9 @@ else
 
 <div class="main-panel">
     <div class="content-wrapper">
+        <h2 style="text-align:center;">DS Máy bay</h2>
         <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-success" })
         </p>
         <table class="table">
             <tr>
@@ -25,21 +26,9 @@ else
                 </th>
                 <th>
                     Số Hiệu
-                </th>
-                @*<th>
-                   HangNhat
-                </th>
+                </th>               
                 <th>
-                  ThuongGia
-                </th>
-                <th>
-                   PTDB
-                </th>
-                <th>
-                    PT
-                </th>*@
-                <th>
-                    hãng
+                    Hãng
                 </th>
                 <th>
                     Mô Tả
@@ -61,7 +50,7 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.SoHieu)
-                    </td>                   
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.HangSX)
                     </td>
