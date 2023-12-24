@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2fd3533a83e948349f5b4976f6a96c9c" Name="Diagram1">
+        <EntityTypeShape EntityType="BanVeMayBayModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_ChuyenBay" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_DatVe" Width="1.5" PointX="12" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_DoiBay" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_Ghe" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_HangGhe" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_HoaDon" Width="1.5" PointX="12" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_KhachHang" Width="1.5" PointX="9.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_MayBay" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_Nghiepvu" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_NguoiDaiDien" Width="1.5" PointX="9.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_NhanVien" Width="1.5" PointX="9.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_SanBay" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_TuyenBay" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_ChuyenBay_tb_MayBay" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_ChuyenBay_tb_TuyenBay" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_DoiBay_tb_ChuyenBay" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_DatVe_tb_Ghe" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_DatVe_tb_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_DatVe_tb_NguoiDaiDien" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_NhanVien_tb_DoiBay" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_Ghe_tb_HangGhe" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_Ghe_tb_MayBay" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_HoaDon_tb_KhachHang1" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_HoaDon_tb_NhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_NguoiDaiDien_tb_KhachHang1" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_NhanVien_tb_Nghiepvu" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK__tb_TuyenB__MaSan__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="BanVeMayBayModel.FK__tb_TuyenB__MaSan__5535A963" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

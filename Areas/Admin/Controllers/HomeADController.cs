@@ -10,7 +10,7 @@ namespace DatVe.Areas.Admin.Controllers
 {
     public class HomeADController : Controller
     {
-        DatVeDBContent db = new DatVeDBContent();
+        BanVeMayBayEntities db = new BanVeMayBayEntities();
         // GET: Admin/HomeAD
         public ActionResult Index()
         {

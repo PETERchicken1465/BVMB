@@ -132,9 +132,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuyenBayController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DaiDienController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DatVeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HangGheController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeADController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachhangController.cs" />
     <Compile Include="Areas\Admin\Controllers\MayBayController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NghiepvuController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhanvienController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\testController.cs" />
@@ -144,21 +148,63 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatVeDBContent.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
-    <Compile Include="Models\tb_ChuyenBay.cs" />
-    <Compile Include="Models\tb_DatVe.cs" />
-    <Compile Include="Models\tb_DoiBay.cs" />
-    <Compile Include="Models\tb_Ghe.cs" />
-    <Compile Include="Models\tb_HangGhe.cs" />
-    <Compile Include="Models\tb_HoaDon.cs" />
-    <Compile Include="Models\tb_KhachHang.cs" />
-    <Compile Include="Models\tb_MayBay.cs" />
-    <Compile Include="Models\tb_Nghiepvu.cs" />
-    <Compile Include="Models\tb_NguoiDaiDien.cs" />
-    <Compile Include="Models\tb_NhanVien.cs" />
-    <Compile Include="Models\tb_SanBay.cs" />
-    <Compile Include="Models\tb_TuyenBay.cs" />
+    <Compile Include="Models\DatVeDBContent.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatVeDBContent.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatVeDBContent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatVeDBContent.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatVeDBContent.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_ChuyenBay.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_DatVe.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_DoiBay.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Ghe.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_HangGhe.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_HoaDon.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_KhachHang.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_MayBay.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Nghiepvu.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_NguoiDaiDien.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_NhanVien.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_SanBay.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_TuyenBay.cs">
+      <DependentUpon>DatVeDBContent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1597,6 +1643,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\DatVeDBContent.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatVeDBContent.edmx</DependentUpon>
+      <LastGenOutput>DatVeDBContent.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DatVeDBContent.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatVeDBContent.edmx</DependentUpon>
+      <LastGenOutput>DatVeDBContent.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -1881,7 +1937,6 @@
     <Content Include="Areas\Admin\Views\Maybay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SlideBar.cshtml" />
     <Content Include="Areas\Admin\Views\SanBay\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ChuyenBay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ToBay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tuyenbay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\test\Index.cshtml" />
@@ -1903,6 +1958,33 @@
     <Content Include="Areas\Admin\Views\Nhanvien\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Nhanvien\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Nhanvien\Delete.cshtml" />
+    <EntityDeploy Include="Models\DatVeDBContent.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatVeDBContent.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DatVeDBContent.edmx.diagram">
+      <DependentUpon>DatVeDBContent.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Nghiepvu\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Nghiepvu\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Nghiepvu\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Nghiepvu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DatVe\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DatVe\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DatVe\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DatVe\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DaiDien\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DaiDien\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DaiDien\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DaiDien\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HangGhe\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HangGhe\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HangGhe\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HangGhe\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuyenBay\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuyenBay\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuyenBay\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ChuyenBay\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1965,6 +2047,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

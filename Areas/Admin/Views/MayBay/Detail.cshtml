@@ -5,61 +5,79 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <h4>Tạo Ghế Máy Bay</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dd>
-            @Html.DisplayFor(model => model.LoaiMayBay)_ @Html.DisplayFor(model => model.SoHieu)_ @Html.DisplayFor(model => model.HangSX)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SoGheHangNhat)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SoGheHangNhat)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SoGheHangThuongGia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SoGheHangThuongGia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SoGheHangPTDB)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SoGheHangPTDB)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SoGheHangPT)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SoGheHangPT)
-        </dd>
-    </dl>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.MaMayBay }, new { @class = "btn btn-danger" }) |
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-        <button class="btn btn-primary" id="seatButton">Tạo Ghế</button>
-    </p>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <h4>Tạo Ghế Máy Bay</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayFor(model => model.LoaiMayBay)_ @Html.DisplayFor(model => model.SoHieu)_ @Html.DisplayFor(model => model.HangSX)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SoGheHangNhat)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SoGheHangNhat)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SoGheHangThuongGia)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SoGheHangThuongGia)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SoGheHangPTDB)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SoGheHangPTDB)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SoGheHangPT)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SoGheHangPT)
+            </dd>
+        </dl>
+        <p>
+            <button class="btn btn-primary" id="seatButton">Tạo Ghế</button> |
+            <button class="btn btn-primary" id="seatButton">Sửa Ghế</button> |
+            <button class="btn btn-primary" id="DseatButton">Xóa ALL Ghế</button>|
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-light" })
+        </p>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
     $(document).ready(function () {
         $('#seatButton').click(function () {
-            var parameterValue = @Html.Raw(Json.Encode(Model.SoGheHangNhat + Model.SoGheHangThuongGia + Model.SoGheHangPTDB + Model.SoGheHangPT));         
+            var parameterValue = @Html.Raw(Json.Encode(Model.SoGheHangNhat + Model.SoGheHangThuongGia + Model.SoGheHangPTDB + Model.SoGheHangPT));
             $.ajax({
                 type: 'POST',
                 url: '/Maybay/GetData',
                 data: { parameterValue: parameterValue ,id :@Model.MaMayBay},
                 success: function (data) {
-                    console.log(data);
-                    // Hiển thị dữ liệu trên giao diện người dùng nếu cần
+                    if (data.success) {
+                        // Nếu xử lý thành công, kiểm tra dữ liệu đã tồn tại
+                        if (data.isDataExists) {
+                            // Nếu dữ liệu đã tồn tại, hiển thị thông báo lỗi
+                            alert('Sơ đồ ghế máy bay này đã tồn tại.');
+                        } else {
+                            // Nếu dữ liệu chưa tồn tại, hiển thị thông báo thành công
+                            alert(data.message);
+                        }
+                    } else {
+                        // Nếu xử lý không thành công, hiển thị thông báo lỗi
+                        alert('Xử lý không thành công: ' + data.error);
+                    }
                 },
                 error: function (error) {
+                    // Nếu có lỗi trong quá trình gửi yêu cầu AJAX, hiển thị thông báo lỗi
                     console.error('Error fetching data: ' + error.statusText);
+                    alert('Error fetching data: ' + error.statusText);
                 }
+
+
             });
         });
     });
-</script>
+    </script>

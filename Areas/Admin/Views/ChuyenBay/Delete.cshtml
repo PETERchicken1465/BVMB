@@ -1,0 +1,140 @@
+﻿@model DatVe.Models.tb_ChuyenBay
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <h2 style="text-align:center;">Thông tin </h2>
+        <div>
+            <h4>tb_ChuyenBay</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.NgayCatCanh)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NgayCatCanh)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DiaDiemDi)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DiaDiemDi)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DiaDiemDen)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DiaDiemDen)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ThoiGianBay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ThoiGianBay)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ThoiGianHaCanh)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ThoiGianHaCanh)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SoGheHangNhat)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SoGheHangNhat)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SoGheHangThuongGia)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SoGheHangThuongGia)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SoGheHangPhoThongDB)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SoGheHangPhoThongDB)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SoGheHangPhoThong)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SoGheHangPhoThong)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TrangThai)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TrangThai)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GiaVePhoThong)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GiaVePhoThong)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tb_MayBay.LoaiMayBay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_MayBay.LoaiMayBay)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tb_TuyenBay.MaTuyenBay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_TuyenBay.MaTuyenBay)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tb_DoiBay.CoTruong)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_DoiBay.CoTruong)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-success" /> |
+            @Html.ActionLink("Quay về", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+            }
+        </div>
+</div>
+</div>

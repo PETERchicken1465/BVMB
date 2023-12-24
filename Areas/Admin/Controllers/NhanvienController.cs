@@ -11,7 +11,7 @@ namespace DatVe.Areas.Admin.Controllers
 {
     public class NhanvienController : Controller
     {
-        DatVeDBContent db = new DatVeDBContent();
+        BanVeMayBayEntities db = new BanVeMayBayEntities();
         // GET: Admin/KhachHang
         public ActionResult Index()
         {

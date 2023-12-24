@@ -9,7 +9,7 @@ namespace DatVe.Areas.Admin.Controllers
 {
     public class testController : Controller
     {
-        DatVeDBContent db = new DatVeDBContent();
+        BanVeMayBayEntities db = new BanVeMayBayEntities();
         // GET: Admin/test
         public ActionResult Index()
         {

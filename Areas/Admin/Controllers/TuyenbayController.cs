@@ -11,7 +11,7 @@ namespace DatVe.Areas.Admin.Controllers
 {
     public class TuyenbayController : Controller
     {
-        DatVeDBContent db = new DatVeDBContent();
+        BanVeMayBayEntities db = new BanVeMayBayEntities();
         // GET: Admin/Tuyenbay
         public ActionResult Index()
         {

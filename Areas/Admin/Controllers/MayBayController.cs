@@ -11,7 +11,7 @@ namespace DatVe.Areas.Admin.Controllers
 {
     public class MayBayController : Controller
     {
-        DatVeDBContent db = new DatVeDBContent();
+        BanVeMayBayEntities db = new BanVeMayBayEntities();
         // GET: Admin/MayBay
         public ActionResult Index()
         {
@@ -100,7 +100,9 @@ namespace DatVe.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var danhSachGhe = db.tb_Ghe.Where(g => g.MaMayBay == id).ToList();
             tb_MayBay ac = db.tb_MayBay.Find(id);
+            db.tb_Ghe.RemoveRange(danhSachGhe);
             db.tb_MayBay.Remove(ac);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -108,11 +110,12 @@ namespace DatVe.Areas.Admin.Controllers
 
 
 
-        int NumberRows;
-        int NumberSeats;
+
         [HttpPost]
         public JsonResult GetData(int parameterValue, int id)
         {
+            int NumberRows;
+            int NumberSeats;
             try
             {
                 if (parameterValue >= 250)
@@ -124,38 +127,57 @@ namespace DatVe.Areas.Admin.Controllers
                     NumberSeats = 6;
                 }
                 NumberRows = parameterValue / NumberSeats;
-
-                // Tạo danh sách chỗ ngồi
+                if (db.tb_Ghe.Any(g => g.MaMayBay == id))
+                {
+                    return Json(new { success = true, isDataExists = true, message = "Dữ liệu đã tồn tại" });
+                }
                 List<tb_Ghe> danhSachGhe = new List<tb_Ghe>();
-
-                // Gán giá trị cho danh sách chỗ ngồi
-                for (int r = 0; r < NumberRows; r++)
+            
+                for (int r = 1; r <= NumberRows; r++)
                 {
                     for (int s = 0; s < NumberSeats; s++)
                     {
                         tb_Ghe ghe = new tb_Ghe
                         {
-                            SoGhe = r * NumberSeats + s + 1,  // Số ghế tăng dần từ 1
+                            SoGhe = r,  // Số ghế tăng dần từ 1
                             TrangThai = false,
                             DayGhe = $"{(char)('A' + s)}",  // Tên của dãy ghế
                             MaHangGhe = 4, // Mã hàng ghế tăng dần từ 1
                             MaMayBay = id,
                         };
-                        r++;
                         danhSachGhe.Add(ghe);
                     }
                 }
+
+                // Thêm số ghế còn thiếu
+                int soGheConThieu = parameterValue - (NumberRows * NumberSeats);
+                for (int i = 1; i <= soGheConThieu; i++)
+                {
+                    tb_Ghe ghe = new tb_Ghe
+                    {
+                        SoGhe = NumberRows + 1,  // Gán số ghế tiếp theo sau khi đã điền đầy các hàng
+                        TrangThai = false,
+                        DayGhe = $"{(char)('A' + (i - 1))}",  // Tên của dãy ghế
+                        MaHangGhe = 1, // Mã hàng ghế tăng dần từ 1
+                        MaMayBay = id,
+                    };
+                    danhSachGhe.Add(ghe);
+                }
+
                 db.tb_Ghe.AddRange(danhSachGhe);
-                db.SaveChanges();               
-                return Json(new { success = true, message = "Xử lý thành công" });
+                db.SaveChanges();
+                return Json(new { success = true, isDataExists = false, message = "Xử lý thành công" });
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 Console.WriteLine($"Inner Exception: {ex.InnerException?.Message}");
-                return Json(new { success = false, message = "Xử lý không thành công", error = ex.Message });
+                return Json(new { success = false, isDataExists = false, message = "Xử lý không thành công", error = ex.Message });
             }
         }
+       
+
+
 
     }
 }

@@ -12,7 +12,7 @@ namespace DatVe.Areas.Admin.Controllers
     public class KhachhangController : Controller
     {
         // GET: Admin/Khachhang
-        DatVeDBContent db = new DatVeDBContent();
+        BanVeMayBayEntities db = new BanVeMayBayEntities();
         // GET: Admin/KhachHang
         public ActionResult Index()
         {

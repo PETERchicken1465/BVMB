@@ -9,7 +9,7 @@ namespace DatVe.Areas.Admin.Controllers
 {
     public class ToBayController : Controller
     {
-        DatVeDBContent db = new DatVeDBContent();
+        BanVeMayBayEntities db = new BanVeMayBayEntities();
         // GET: Admin/ToBay
         public ActionResult Index()
         {

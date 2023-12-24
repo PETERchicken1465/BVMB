@@ -12,17 +12,12 @@ namespace DatVe.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_DatVe
+    public partial class sysdiagrams
     {
-        public int MaDatVe { get; set; }
-        public System.DateTime NgayDat { get; set; }
-        public Nullable<int> SoGhe { get; set; }
-        public int MaGhe { get; set; }
-        public int MaKH { get; set; }
-        public Nullable<int> MaNĐD { get; set; }
-    
-        public virtual tb_Ghe tb_Ghe { get; set; }
-        public virtual tb_KhachHang tb_KhachHang { get; set; }
-        public virtual tb_NguoiDaiDien tb_NguoiDaiDien { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

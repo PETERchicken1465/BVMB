@@ -1,8 +1,86 @@
-﻿
+﻿@model IEnumerable<DatVe.Models.tb_ChuyenBay>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <h2 style="text-align:center;">DS Chuyến bay</h2>
+        <p>
+            @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayCatCanh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaDiemDi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaDiemDen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThoiGianBay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThoiGianHaCanh)
+                </th>                
+                <th>
+                    @Html.DisplayNameFor(model => model.TrangThai)
+                </th>               
+                <th>
+                    @Html.DisplayNameFor(model => model.tb_MayBay.LoaiMayBay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tb_TuyenBay.MaTuyenBay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tb_DoiBay.CoTruong)
+                </th>
+                <th></th>
+            </tr>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayCatCanh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaDiemDi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaDiemDen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiGianBay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiGianHaCanh)
+                    </td>                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrangThai)
+                    </td>                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tb_MayBay.LoaiMayBay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tb_TuyenBay.MaTuyenBay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tb_DoiBay.CoTruong)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.MaChuyenBay })" class="btn btn-warning" role="button">Sửa</a>                  
+                        <a href="@Url.Action("Delete", new { id = item.MaChuyenBay })" class="btn btn-danger" role="button">Xóa</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+</div>
+
+</div>
