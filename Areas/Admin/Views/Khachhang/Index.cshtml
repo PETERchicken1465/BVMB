@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DatVe.Models.tb_KhachHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+<div class="content-wrapper">
+    <h2 style="text-align:center;">DS Khách Hàng</h2>
+    <p>
+        @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-success" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HovaTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tuoi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport_number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuocTich)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HovaTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tuoi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passport_number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuocTich)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.MaKhachHang })" class="btn btn-warning" role="button">Sửa</a>                 
+                    <a href="@Url.Action("Delete", new { id = item.MaKhachHang })" class="btn btn-danger" role="button">Xóa</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+</div>

@@ -133,12 +133,13 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuyenBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeADController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KhachhangController.cs" />
     <Compile Include="Areas\Admin\Controllers\MayBayController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhanvienController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\testController.cs" />
     <Compile Include="Areas\Admin\Controllers\ToBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\TuyenbayController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1894,6 +1895,14 @@
     <Content Include="Areas\Admin\Views\Maybay\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Maybay\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Maybay\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Khachhang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanvien\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanvien\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanvien\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanvien\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1923,7 +1932,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
