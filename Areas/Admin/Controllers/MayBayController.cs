@@ -96,7 +96,7 @@ namespace DatVe.Areas.Admin.Controllers
             return View(ac);
         }
 
-        // POST: Admin/User/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

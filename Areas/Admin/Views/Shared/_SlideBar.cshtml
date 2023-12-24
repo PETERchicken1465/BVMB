@@ -16,11 +16,26 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Index","User")" aria-expanded="false" aria-controls="charts">
-                <i class="menu-icon mdi mdi-account-multiple-outline"></i>
-                <span class="menu-title">Người dùng </span>
+            <a class="nav-link" href="@Url.Action("Index","VeMayBay")" aria-expanded="false" aria-controls="charts">
+                <i class="menu-icon mdi mdi-ticket-confirmation"></i>
+                <span class="menu-title">Vé máy bay </span>
             </a>
+        </li>         
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements1" aria-expanded="false" aria-controls="form-elements1">
+                <i class="menu-icon mdi mdi-account"></i>
+                <span class="menu-title">Người dùng</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements1">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="/Admin/NhanVien">Nhân viên</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Admin/KhachHang">Khách Hàng</a></li>                        
+                </ul>
+            </div>
         </li>
+       
+
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="@Url.Action("Index","ToBay")" aria-expanded="false" aria-controls="tables">
                 <i class="menu-icon mdi mdi-airplane-takeoff"></i>
