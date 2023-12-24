@@ -49,7 +49,6 @@ namespace DatVe.Areas.Admin.Controllers
             return View(a);
         }
 
-
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -107,6 +106,56 @@ namespace DatVe.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+        int NumberRows;
+        int NumberSeats;
+        [HttpPost]
+        public JsonResult GetData(int parameterValue, int id)
+        {
+            try
+            {
+                if (parameterValue >= 250)
+                {
+                    NumberSeats = 9;
+                }
+                else
+                {
+                    NumberSeats = 6;
+                }
+                NumberRows = parameterValue / NumberSeats;
+
+                // Tạo danh sách chỗ ngồi
+                List<tb_Ghe> danhSachGhe = new List<tb_Ghe>();
+
+                // Gán giá trị cho danh sách chỗ ngồi
+                for (int r = 0; r < NumberRows; r++)
+                {
+                    for (int s = 0; s < NumberSeats; s++)
+                    {
+                        tb_Ghe ghe = new tb_Ghe
+                        {
+                            SoGhe = r * NumberSeats + s + 1,  // Số ghế tăng dần từ 1
+                            TrangThai = false,
+                            DayGhe = $"{(char)('A' + s)}",  // Tên của dãy ghế
+                            MaHangGhe = 4, // Mã hàng ghế tăng dần từ 1
+                            MaMayBay = id,
+                        };
+                        r++;
+                        danhSachGhe.Add(ghe);
+                    }
+                }
+                db.tb_Ghe.AddRange(danhSachGhe);
+                db.SaveChanges();               
+                return Json(new { success = true, message = "Xử lý thành công" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Inner Exception: {ex.InnerException?.Message}");
+                return Json(new { success = false, message = "Xử lý không thành công", error = ex.Message });
+            }
+        }
 
     }
 }
