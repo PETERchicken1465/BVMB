@@ -132,17 +132,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuyenBayController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DaiDienController.cs" />
     <Compile Include="Areas\Admin\Controllers\DatVeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DoiBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\HangGheController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeADController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachhangController.cs" />
     <Compile Include="Areas\Admin\Controllers\MayBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\NghiepvuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NguoiDaiDienController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhanvienController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\testController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ToBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\TuyenbayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1640,6 +1640,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Client1\css\bootstrap.min.css" />
+    <Content Include="Content\Client1\css\style.css" />
+    <Content Include="Content\Client1\img\background.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1937,7 +1940,6 @@
     <Content Include="Areas\Admin\Views\Maybay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SlideBar.cshtml" />
     <Content Include="Areas\Admin\Views\SanBay\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ToBay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tuyenbay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\test\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SanBay\Create.cshtml" />
@@ -1973,10 +1975,6 @@
     <Content Include="Areas\Admin\Views\DatVe\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\DatVe\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\DatVe\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\DaiDien\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\DaiDien\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\DaiDien\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\DaiDien\Index.cshtml" />
     <Content Include="Areas\Admin\Views\HangGhe\Create.cshtml" />
     <Content Include="Areas\Admin\Views\HangGhe\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\HangGhe\Edit.cshtml" />
@@ -1985,6 +1983,15 @@
     <Content Include="Areas\Admin\Views\ChuyenBay\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ChuyenBay\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ChuyenBay\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDaiDien\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDaiDien\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDaiDien\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDaiDien\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDaiDien\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DoiBay\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DoiBay\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DoiBay\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DoiBay\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2007,8 +2014,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

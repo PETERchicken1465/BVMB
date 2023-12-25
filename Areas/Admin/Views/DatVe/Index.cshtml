@@ -5,48 +5,54 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SoGhe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tb_Ghe.DayGhe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tb_KhachHang.HovaTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tb_NguoiDaiDien.TenNguoiDaiDien)
-        </th>
-        <th></th>
-    </tr>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <h2 style="text-align:center;">DS Chuyen bay</h2>
+        <p>
+            @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    Họ và Tên KH
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoGhe)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tb_Ghe.DayGhe)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.tb_NguoiDaiDien.TenNguoiDaiDien)
+                </th>*@
+                <th></th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoGhe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tb_Ghe.DayGhe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tb_KhachHang.HovaTen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tb_NguoiDaiDien.TenNguoiDaiDien)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tb_NguoiDaiDien.TenNguoiDaiDien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoGhe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tb_Ghe.DayGhe) @Html.DisplayFor(modelItem => item.tb_Ghe.SoGhe)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.tb_KhachHang.HovaTen)
+                    </td>*@
+                    
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.MaDatVe })" class="btn btn-warning" role="button">Summit</a>
+                    <a href="@Url.Action("Detail", new { id = item.MaDatVe })" class="btn btn-warning" role="button">Xem</a>
+                    <a href="@Url.Action("Delete", new { id = item.MaDatVe })" class="btn btn-danger" role="button">Xóa</a>
+                </td>
+                </tr>
+            }
 
-</table>
+        </table>
+</div>
+</div>

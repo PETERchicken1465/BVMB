@@ -39,7 +39,7 @@ namespace DatVe.Areas.Admin.Controllers
         // GET: Admin/DatVe/Create
         public ActionResult Create()
         {
-            ViewBag.MaGhe = new SelectList(db.tb_Ghe, "MaGhe", "DayGhe");
+            ViewBag.MaGhe = new SelectList(db.tb_Ghe, "MaGhe", "DayGhe","SoGhe");
             ViewBag.MaKH = new SelectList(db.tb_KhachHang, "MaKhachHang", "HovaTen");
             ViewBag.MaNĐD = new SelectList(db.tb_NguoiDaiDien, "MaNguoiDaiDien", "TenNguoiDaiDien");
             return View();
@@ -59,7 +59,7 @@ namespace DatVe.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaGhe = new SelectList(db.tb_Ghe, "MaGhe", "DayGhe", tb_DatVe.MaGhe);
+            ViewBag.MaGhe = new SelectList(db.tb_Ghe, "MaGhe", "DayGhe", "SoGhe", tb_DatVe.MaGhe);
             ViewBag.MaKH = new SelectList(db.tb_KhachHang, "MaKhachHang", "HovaTen", tb_DatVe.MaKH);
             ViewBag.MaNĐD = new SelectList(db.tb_NguoiDaiDien, "MaNguoiDaiDien", "TenNguoiDaiDien", tb_DatVe.MaNĐD);
             return View(tb_DatVe);

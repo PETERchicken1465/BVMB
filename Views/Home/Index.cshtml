@@ -2,32 +2,117 @@
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<div class="col-md-7 col-md-offset-1">
+    <div class="booking-form">
+        <form>
+            <div class="form-group">
+                <div class="form-checkbox">
+                    <label for="roundtrip">
+                        <input type="radio" id="roundtrip" name="flight-type" onclick="show()" checked>
+                        <span></span>Khứ hồi
+                    </label>
+                    <label for="one-way">
+                        <input type="radio" id="one-way" name="flight-type" onclick="hide()">
+                        <span></span>Một Chiều
+                    </label>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="form-label">Từ</span>
+                        <input class="form-control" type="text" placeholder="Điểm Khởi Hành" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="form-label">Đến</span>
+                        <input class="form-control" type="text" placeholder="Điểm Đến" required title="Vui lòng chọn điểm đến">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="form-label">Khởi hành</span>
+                        <input class="form-control" type="date" required title="Vui lòng chọn ngày khởi hàng">
+                    </div>
+                </div>
+                <div class="col-md-6" id="returnDateContainer">
+                    <div class="form-group">
+                        <span class="form-label">Ngày về</span>
+                        <input class="form-control" type="date" required title="Vui lòng chọn ngày về">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span class="form-label">Adults (18+)</span>
+                        <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>                           
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span class="form-label">Children (0-17)</span>
+                        <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span class="form-label">Travel class</span>
+                        <select class="form-control">
+                            <option>Hạng Phổ Thông </option>
+                            <option>Hạng Thương Gia</option>
+                            <option>Hạng Nhất</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-btn">
+                <button class="submit-btn">TÌM CHUYẾN BAY</button>
+            </div>
+        </form>
     </div>
-</main>
+</div>
+<script>
+    function hide() {
+        var returnDateContainer = document.getElementById("returnDateContainer");
+        // Check if the "Một Chiều" radio button is selected
+        if (document.getElementById("one-way").checked) {      
+            returnDateContainer.style.display = "none";
+        } else {   
+            returnDateContainer.style.display = "block";
+        }
+    }
+    function show() {
+        var returnDateContainer = document.getElementById("returnDateContainer");
+        returnDateContainer.style.display = "block";
+    }
+</script>

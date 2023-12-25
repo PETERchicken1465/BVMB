@@ -17,9 +17,9 @@ namespace DatVe.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_KhachHang()
         {
-            this.tb_DatVe = new HashSet<tb_DatVe>();
             this.tb_HoaDon = new HashSet<tb_HoaDon>();
             this.tb_NguoiDaiDien = new HashSet<tb_NguoiDaiDien>();
+            this.tb_DatVe = new HashSet<tb_DatVe>();
         }
     
         public int MaKhachHang { get; set; }
@@ -32,10 +32,10 @@ namespace DatVe.Models
         public string QuocTich { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_DatVe> tb_DatVe { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_HoaDon> tb_HoaDon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_NguoiDaiDien> tb_NguoiDaiDien { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_DatVe> tb_DatVe { get; set; }
     }
 }

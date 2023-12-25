@@ -1,0 +1,35 @@
+﻿@model DatVe.Models.tb_NguoiDaiDien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_NguoiDaiDien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNguoiDaiDien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNguoiDaiDien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_KhachHang.HovaTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_KhachHang.HovaTen)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaNguoiDaiDien }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

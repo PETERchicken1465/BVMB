@@ -46,8 +46,10 @@
                         @Html.DisplayFor(modelItem => item.ThoiGianBay)_@Html.DisplayFor(modelItem => item.ThoiGianHaCanh)
                     </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TrangThai)
+                    <td>                     
+                        <span style="@(item.TrangThai == true ? "color: green; font-weight: bold;" : "color: red; font-weight: normal;")">
+                            @(item.TrangThai == true ? "Đã cất cánh" : "Đang chuẩn bị")
+                        </span>
                     </td>
 
                     <td>

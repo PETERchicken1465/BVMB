@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DatVe.Models.tb_DoiBay>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <h2 style="text-align:center;">DS ĐỘI Bay</h2>
+        <p>
+            @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CoTruong)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CoPho)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tb_ChuyenBay.DiaDiemDi)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CoTruong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CoPho)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tb_ChuyenBay.DiaDiemDi)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.MaDoiBay })" class="btn btn-warning" role="button">Sửa</a>
+                        <a href="@Url.Action("Delete", new { id = item.MaDoiBay})" class="btn btn-danger" role="button">Xóa</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+</div></div>

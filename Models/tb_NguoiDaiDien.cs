@@ -23,9 +23,11 @@ namespace DatVe.Models
         public int MaNguoiDaiDien { get; set; }
         public string TenNguoiDaiDien { get; set; }
         public int MaKH { get; set; }
+        public Nullable<int> SoLuong { get; set; }
+        public Nullable<int> TongTien { get; set; }
     
+        public virtual tb_KhachHang tb_KhachHang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_DatVe> tb_DatVe { get; set; }
-        public virtual tb_KhachHang tb_KhachHang { get; set; }
     }
 }

@@ -27,9 +27,9 @@ namespace DatVe.Models
         public Nullable<int> MaHangGhe { get; set; }
         public Nullable<int> MaMayBay { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_DatVe> tb_DatVe { get; set; }
         public virtual tb_HangGhe tb_HangGhe { get; set; }
         public virtual tb_MayBay tb_MayBay { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_DatVe> tb_DatVe { get; set; }
     }
 }

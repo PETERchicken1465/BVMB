@@ -24,8 +24,8 @@ namespace DatVe.Models
         public string CoTruong { get; set; }
         public string CoPho { get; set; }
     
+        public virtual tb_ChuyenBay tb_ChuyenBay { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_NhanVien> tb_NhanVien { get; set; }
-        public virtual tb_ChuyenBay tb_ChuyenBay { get; set; }
     }
 }

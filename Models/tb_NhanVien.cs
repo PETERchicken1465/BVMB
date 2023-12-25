@@ -30,9 +30,9 @@ namespace DatVe.Models
         public Nullable<int> MaNghiepVu { get; set; }
         public Nullable<int> MaDoiBay { get; set; }
     
-        public virtual tb_DoiBay tb_DoiBay { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_HoaDon> tb_HoaDon { get; set; }
         public virtual tb_Nghiepvu tb_Nghiepvu { get; set; }
+        public virtual tb_DoiBay tb_DoiBay { get; set; }
     }
 }
