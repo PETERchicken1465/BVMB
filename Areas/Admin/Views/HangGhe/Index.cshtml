@@ -5,30 +5,33 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <h2 style="text-align:center;">Hạng ghế</h2>
+        <p>
+            @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenHangGhe)
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenHangGhe)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenHangGhe)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.MaHangGhe })" class="btn btn-warning" role="button">Sửa</a>                        
+                        <a href="@Url.Action("Delete", new { id = item.MaHangGhe })" class="btn btn-danger" role="button">Xóa</a>
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenHangGhe)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaHangGhe }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaHangGhe }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaHangGhe })
-        </td>
-    </tr>
-}
-
-</table>
+        </table>
+</div>
+</div>

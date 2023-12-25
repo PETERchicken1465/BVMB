@@ -17,8 +17,8 @@ namespace DatVe.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_MayBay()
         {
-            this.tb_ChuyenBay = new HashSet<tb_ChuyenBay>();
             this.tb_Ghe = new HashSet<tb_Ghe>();
+            this.tb_ChuyenBay = new HashSet<tb_ChuyenBay>();
         }
     
         public int MaMayBay { get; set; }
@@ -34,8 +34,8 @@ namespace DatVe.Models
         public Nullable<System.DateTime> NgayHetHan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_ChuyenBay> tb_ChuyenBay { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Ghe> tb_Ghe { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_ChuyenBay> tb_ChuyenBay { get; set; }
     }
 }

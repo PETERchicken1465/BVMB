@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BanVeMayBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BanVeMayBayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="MaChuyenBay" />
           </Key>
-          <Property Name="MaChuyenBay" Type="int" Nullable="false" />
+          <Property Name="MaChuyenBay" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NgayCatCanh" Type="datetime" />
           <Property Name="DiaDiemDi" Type="nvarchar" MaxLength="255" />
           <Property Name="DiaDiemDen" Type="nvarchar" MaxLength="255" />
@@ -412,8 +412,7 @@
             <End Role="tb_NhanVien" EntitySet="tb_NhanVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BanVeMayBayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -426,28 +425,6 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="tb_ChuyenBay">
-          <Key>
-            <PropertyRef Name="MaChuyenBay" />
-          </Key>
-          <Property Name="MaChuyenBay" Type="Int32" Nullable="false" />
-          <Property Name="NgayCatCanh" Type="DateTime" Precision="3" />
-          <Property Name="DiaDiemDi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DiaDiemDen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ThoiGianBay" Type="DateTime" Precision="3" />
-          <Property Name="ThoiGianHaCanh" Type="DateTime" Precision="3" />
-          <Property Name="SoGheHangNhat" Type="Int32" />
-          <Property Name="SoGheHangThuongGia" Type="Int32" />
-          <Property Name="SoGheHangPhoThongDB" Type="Int32" />
-          <Property Name="SoGheHangPhoThong" Type="Int32" />
-          <Property Name="TrangThai" Type="Boolean" />
-          <Property Name="GiaVePhoThong" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="MaMayBay" Type="Int32" />
-          <Property Name="MaTuyenBay" Type="Int32" />
-          <NavigationProperty Name="tb_MayBay" Relationship="Self.FK_tb_ChuyenBay_tb_MayBay" FromRole="tb_ChuyenBay" ToRole="tb_MayBay" />
-          <NavigationProperty Name="tb_TuyenBay" Relationship="Self.FK_tb_ChuyenBay_tb_TuyenBay" FromRole="tb_ChuyenBay" ToRole="tb_TuyenBay" />
-          <NavigationProperty Name="tb_DoiBay" Relationship="Self.FK_tb_DoiBay_tb_ChuyenBay" FromRole="tb_ChuyenBay" ToRole="tb_DoiBay" />
         </EntityType>
         <EntityType Name="tb_DatVe">
           <Key>
@@ -471,8 +448,8 @@
           <Property Name="MaDoiBay" Type="Int32" Nullable="false" />
           <Property Name="CoTruong" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CoPho" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="tb_ChuyenBay" Relationship="Self.FK_tb_DoiBay_tb_ChuyenBay" FromRole="tb_DoiBay" ToRole="tb_ChuyenBay" />
           <NavigationProperty Name="tb_NhanVien" Relationship="Self.FK_tb_NhanVien_tb_DoiBay" FromRole="tb_DoiBay" ToRole="tb_NhanVien" />
+          <NavigationProperty Name="tb_ChuyenBay" Relationship="BanVeMayBayModel.FK_tb_DoiBay_tb_ChuyenBay" FromRole="tb_DoiBay" ToRole="tb_ChuyenBay" />
         </EntityType>
         <EntityType Name="tb_Ghe">
           <Key>
@@ -539,8 +516,8 @@
           <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgaySuDung" Type="DateTime" Precision="3" />
           <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tb_ChuyenBay" Relationship="Self.FK_tb_ChuyenBay_tb_MayBay" FromRole="tb_MayBay" ToRole="tb_ChuyenBay" />
           <NavigationProperty Name="tb_Ghe" Relationship="Self.FK_tb_Ghe_tb_MayBay" FromRole="tb_MayBay" ToRole="tb_Ghe" />
+          <NavigationProperty Name="tb_ChuyenBay" Relationship="BanVeMayBayModel.FK_tb_ChuyenBay_tb_MayBay" FromRole="tb_MayBay" ToRole="tb_ChuyenBay" />
         </EntityType>
         <EntityType Name="tb_Nghiepvu">
           <Key>
@@ -594,46 +571,10 @@
           <Property Name="MaTuyenBay" Type="Int32" Nullable="false" />
           <Property Name="MaSanBayDi" Type="Int32" />
           <Property Name="MaSanBayDen" Type="Int32" />
-          <NavigationProperty Name="tb_ChuyenBay" Relationship="Self.FK_tb_ChuyenBay_tb_TuyenBay" FromRole="tb_TuyenBay" ToRole="tb_ChuyenBay" />
           <NavigationProperty Name="tb_SanBay" Relationship="Self.FK__tb_TuyenB__MaSan__5441852A" FromRole="tb_TuyenBay" ToRole="tb_SanBay" />
           <NavigationProperty Name="tb_SanBay1" Relationship="Self.FK__tb_TuyenB__MaSan__5535A963" FromRole="tb_TuyenBay" ToRole="tb_SanBay" />
+          <NavigationProperty Name="tb_ChuyenBay" Relationship="BanVeMayBayModel.FK_tb_ChuyenBay_tb_TuyenBay" FromRole="tb_TuyenBay" ToRole="tb_ChuyenBay" />
         </EntityType>
-        <Association Name="FK_tb_ChuyenBay_tb_MayBay">
-          <End Role="tb_MayBay" Type="Self.tb_MayBay" Multiplicity="0..1" />
-          <End Role="tb_ChuyenBay" Type="Self.tb_ChuyenBay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_MayBay">
-              <PropertyRef Name="MaMayBay" />
-            </Principal>
-            <Dependent Role="tb_ChuyenBay">
-              <PropertyRef Name="MaMayBay" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_ChuyenBay_tb_TuyenBay">
-          <End Role="tb_TuyenBay" Type="Self.tb_TuyenBay" Multiplicity="0..1" />
-          <End Role="tb_ChuyenBay" Type="Self.tb_ChuyenBay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_TuyenBay">
-              <PropertyRef Name="MaTuyenBay" />
-            </Principal>
-            <Dependent Role="tb_ChuyenBay">
-              <PropertyRef Name="MaTuyenBay" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_DoiBay_tb_ChuyenBay">
-          <End Role="tb_ChuyenBay" Type="Self.tb_ChuyenBay" Multiplicity="1" />
-          <End Role="tb_DoiBay" Type="Self.tb_DoiBay" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tb_ChuyenBay">
-              <PropertyRef Name="MaChuyenBay" />
-            </Principal>
-            <Dependent Role="tb_DoiBay">
-              <PropertyRef Name="MaDoiBay" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tb_DatVe_tb_Ghe">
           <End Role="tb_Ghe" Type="Self.tb_Ghe" Multiplicity="1" />
           <End Role="tb_DatVe" Type="Self.tb_DatVe" Multiplicity="*" />
@@ -780,7 +721,6 @@
         </Association>
         <EntityContainer Name="BanVeMayBayEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="tb_ChuyenBay" EntityType="Self.tb_ChuyenBay" />
           <EntitySet Name="tb_DatVe" EntityType="Self.tb_DatVe" />
           <EntitySet Name="tb_DoiBay" EntityType="Self.tb_DoiBay" />
           <EntitySet Name="tb_Ghe" EntityType="Self.tb_Ghe" />
@@ -793,18 +733,6 @@
           <EntitySet Name="tb_NhanVien" EntityType="Self.tb_NhanVien" />
           <EntitySet Name="tb_SanBay" EntityType="Self.tb_SanBay" />
           <EntitySet Name="tb_TuyenBay" EntityType="Self.tb_TuyenBay" />
-          <AssociationSet Name="FK_tb_ChuyenBay_tb_MayBay" Association="Self.FK_tb_ChuyenBay_tb_MayBay">
-            <End Role="tb_MayBay" EntitySet="tb_MayBay" />
-            <End Role="tb_ChuyenBay" EntitySet="tb_ChuyenBay" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_ChuyenBay_tb_TuyenBay" Association="Self.FK_tb_ChuyenBay_tb_TuyenBay">
-            <End Role="tb_TuyenBay" EntitySet="tb_TuyenBay" />
-            <End Role="tb_ChuyenBay" EntitySet="tb_ChuyenBay" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_DoiBay_tb_ChuyenBay" Association="Self.FK_tb_DoiBay_tb_ChuyenBay">
-            <End Role="tb_ChuyenBay" EntitySet="tb_ChuyenBay" />
-            <End Role="tb_DoiBay" EntitySet="tb_DoiBay" />
-          </AssociationSet>
           <AssociationSet Name="FK_tb_DatVe_tb_Ghe" Association="Self.FK_tb_DatVe_tb_Ghe">
             <End Role="tb_Ghe" EntitySet="tb_Ghe" />
             <End Role="tb_DatVe" EntitySet="tb_DatVe" />
@@ -853,7 +781,78 @@
             <End Role="tb_SanBay" EntitySet="tb_SanBay" />
             <End Role="tb_TuyenBay" EntitySet="tb_TuyenBay" />
           </AssociationSet>
+          <EntitySet Name="tb_ChuyenBay" EntityType="BanVeMayBayModel.tb_ChuyenBay" />
+          <AssociationSet Name="FK_tb_ChuyenBay_tb_MayBay" Association="BanVeMayBayModel.FK_tb_ChuyenBay_tb_MayBay">
+            <End Role="tb_MayBay" EntitySet="tb_MayBay" />
+            <End Role="tb_ChuyenBay" EntitySet="tb_ChuyenBay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_ChuyenBay_tb_TuyenBay" Association="BanVeMayBayModel.FK_tb_ChuyenBay_tb_TuyenBay">
+            <End Role="tb_TuyenBay" EntitySet="tb_TuyenBay" />
+            <End Role="tb_ChuyenBay" EntitySet="tb_ChuyenBay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_DoiBay_tb_ChuyenBay" Association="BanVeMayBayModel.FK_tb_DoiBay_tb_ChuyenBay">
+            <End Role="tb_ChuyenBay" EntitySet="tb_ChuyenBay" />
+            <End Role="tb_DoiBay" EntitySet="tb_DoiBay" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tb_ChuyenBay">
+          <Key>
+            <PropertyRef Name="MaChuyenBay" />
+          </Key>
+          <Property Name="MaChuyenBay" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayCatCanh" Type="DateTime" Precision="3" />
+          <Property Name="DiaDiemDi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DiaDiemDen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiGianBay" Type="DateTime" Precision="3" />
+          <Property Name="ThoiGianHaCanh" Type="DateTime" Precision="3" />
+          <Property Name="SoGheHangNhat" Type="Int32" />
+          <Property Name="SoGheHangThuongGia" Type="Int32" />
+          <Property Name="SoGheHangPhoThongDB" Type="Int32" />
+          <Property Name="SoGheHangPhoThong" Type="Int32" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="GiaVePhoThong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MaMayBay" Type="Int32" />
+          <Property Name="MaTuyenBay" Type="Int32" />
+          <NavigationProperty Name="tb_MayBay" Relationship="BanVeMayBayModel.FK_tb_ChuyenBay_tb_MayBay" FromRole="tb_ChuyenBay" ToRole="tb_MayBay" />
+          <NavigationProperty Name="tb_TuyenBay" Relationship="BanVeMayBayModel.FK_tb_ChuyenBay_tb_TuyenBay" FromRole="tb_ChuyenBay" ToRole="tb_TuyenBay" />
+          <NavigationProperty Name="tb_DoiBay" Relationship="BanVeMayBayModel.FK_tb_DoiBay_tb_ChuyenBay" FromRole="tb_ChuyenBay" ToRole="tb_DoiBay" />
+        </EntityType>
+        <Association Name="FK_tb_ChuyenBay_tb_MayBay">
+          <End Type="BanVeMayBayModel.tb_MayBay" Role="tb_MayBay" Multiplicity="0..1" />
+          <End Type="BanVeMayBayModel.tb_ChuyenBay" Role="tb_ChuyenBay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_MayBay">
+              <PropertyRef Name="MaMayBay" />
+            </Principal>
+            <Dependent Role="tb_ChuyenBay">
+              <PropertyRef Name="MaMayBay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_ChuyenBay_tb_TuyenBay">
+          <End Type="BanVeMayBayModel.tb_TuyenBay" Role="tb_TuyenBay" Multiplicity="0..1" />
+          <End Type="BanVeMayBayModel.tb_ChuyenBay" Role="tb_ChuyenBay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_TuyenBay">
+              <PropertyRef Name="MaTuyenBay" />
+            </Principal>
+            <Dependent Role="tb_ChuyenBay">
+              <PropertyRef Name="MaTuyenBay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_DoiBay_tb_ChuyenBay">
+          <End Type="BanVeMayBayModel.tb_ChuyenBay" Role="tb_ChuyenBay" Multiplicity="1" />
+          <End Type="BanVeMayBayModel.tb_DoiBay" Role="tb_DoiBay" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tb_ChuyenBay">
+              <PropertyRef Name="MaChuyenBay" />
+            </Principal>
+            <Dependent Role="tb_DoiBay">
+              <PropertyRef Name="MaDoiBay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -868,26 +867,6 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_ChuyenBay">
-            <EntityTypeMapping TypeName="BanVeMayBayModel.tb_ChuyenBay">
-              <MappingFragment StoreEntitySet="tb_ChuyenBay">
-                <ScalarProperty Name="MaChuyenBay" ColumnName="MaChuyenBay" />
-                <ScalarProperty Name="NgayCatCanh" ColumnName="NgayCatCanh" />
-                <ScalarProperty Name="DiaDiemDi" ColumnName="DiaDiemDi" />
-                <ScalarProperty Name="DiaDiemDen" ColumnName="DiaDiemDen" />
-                <ScalarProperty Name="ThoiGianBay" ColumnName="ThoiGianBay" />
-                <ScalarProperty Name="ThoiGianHaCanh" ColumnName="ThoiGianHaCanh" />
-                <ScalarProperty Name="SoGheHangNhat" ColumnName="SoGheHangNhat" />
-                <ScalarProperty Name="SoGheHangThuongGia" ColumnName="SoGheHangThuongGia" />
-                <ScalarProperty Name="SoGheHangPhoThongDB" ColumnName="SoGheHangPhoThongDB" />
-                <ScalarProperty Name="SoGheHangPhoThong" ColumnName="SoGheHangPhoThong" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="GiaVePhoThong" ColumnName="GiaVePhoThong" />
-                <ScalarProperty Name="MaMayBay" ColumnName="MaMayBay" />
-                <ScalarProperty Name="MaTuyenBay" ColumnName="MaTuyenBay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1021,6 +1000,26 @@
                 <ScalarProperty Name="MaTuyenBay" ColumnName="MaTuyenBay" />
                 <ScalarProperty Name="MaSanBayDi" ColumnName="MaSanBayDi" />
                 <ScalarProperty Name="MaSanBayDen" ColumnName="MaSanBayDen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ChuyenBay">
+            <EntityTypeMapping TypeName="BanVeMayBayModel.tb_ChuyenBay">
+              <MappingFragment StoreEntitySet="tb_ChuyenBay">
+                <ScalarProperty Name="MaTuyenBay" ColumnName="MaTuyenBay" />
+                <ScalarProperty Name="MaMayBay" ColumnName="MaMayBay" />
+                <ScalarProperty Name="GiaVePhoThong" ColumnName="GiaVePhoThong" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="SoGheHangPhoThong" ColumnName="SoGheHangPhoThong" />
+                <ScalarProperty Name="SoGheHangPhoThongDB" ColumnName="SoGheHangPhoThongDB" />
+                <ScalarProperty Name="SoGheHangThuongGia" ColumnName="SoGheHangThuongGia" />
+                <ScalarProperty Name="SoGheHangNhat" ColumnName="SoGheHangNhat" />
+                <ScalarProperty Name="ThoiGianHaCanh" ColumnName="ThoiGianHaCanh" />
+                <ScalarProperty Name="ThoiGianBay" ColumnName="ThoiGianBay" />
+                <ScalarProperty Name="DiaDiemDen" ColumnName="DiaDiemDen" />
+                <ScalarProperty Name="DiaDiemDi" ColumnName="DiaDiemDi" />
+                <ScalarProperty Name="NgayCatCanh" ColumnName="NgayCatCanh" />
+                <ScalarProperty Name="MaChuyenBay" ColumnName="MaChuyenBay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

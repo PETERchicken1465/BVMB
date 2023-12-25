@@ -21,21 +21,7 @@ namespace DatVe.Areas.Admin.Controllers
         }
 
         // GET: Admin/HangGhe/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_HangGhe tb_HangGhe = db.tb_HangGhe.Find(id);
-            if (tb_HangGhe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_HangGhe);
-        }
-
-        // GET: Admin/HangGhe/Create
+       
         public ActionResult Create()
         {
             return View();
@@ -115,13 +101,6 @@ namespace DatVe.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }

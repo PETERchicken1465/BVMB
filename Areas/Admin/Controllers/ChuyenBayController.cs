@@ -21,7 +21,22 @@ namespace DatVe.Areas.Admin.Controllers
             return View(tb_ChuyenBay.ToList());
         }
 
-               // GET: Admin/ChuyenBay/Create
+        // GET: Admin/ChuyenBay/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tb_ChuyenBay tb_ChuyenBay = db.tb_ChuyenBay.Find(id);
+            if (tb_ChuyenBay == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tb_ChuyenBay);
+        }
+
+        // GET: Admin/ChuyenBay/Create
         public ActionResult Create()
         {
             ViewBag.MaMayBay = new SelectList(db.tb_MayBay, "MaMayBay", "LoaiMayBay");
@@ -64,7 +79,7 @@ namespace DatVe.Areas.Admin.Controllers
             }
             ViewBag.MaMayBay = new SelectList(db.tb_MayBay, "MaMayBay", "LoaiMayBay", tb_ChuyenBay.MaMayBay);
             ViewBag.MaTuyenBay = new SelectList(db.tb_TuyenBay, "MaTuyenBay", "MaTuyenBay", tb_ChuyenBay.MaTuyenBay);
-            ViewBag.MaChuyenBay = new SelectList(db.tb_DoiBay, "MaDoiBay", "CoTruong", tb_ChuyenBay.MaChuyenBay);
+           // ViewBag.MaChuyenBay = new SelectList(db.tb_DoiBay, "MaDoiBay", "CoTruong", tb_ChuyenBay.MaChuyenBay);
             return View(tb_ChuyenBay);
         }
 
@@ -83,7 +98,7 @@ namespace DatVe.Areas.Admin.Controllers
             }
             ViewBag.MaMayBay = new SelectList(db.tb_MayBay, "MaMayBay", "LoaiMayBay", tb_ChuyenBay.MaMayBay);
             ViewBag.MaTuyenBay = new SelectList(db.tb_TuyenBay, "MaTuyenBay", "MaTuyenBay", tb_ChuyenBay.MaTuyenBay);
-            ViewBag.MaChuyenBay = new SelectList(db.tb_DoiBay, "MaDoiBay", "CoTruong", tb_ChuyenBay.MaChuyenBay);
+           // ViewBag.MaChuyenBay = new SelectList(db.tb_DoiBay, "MaDoiBay", "CoTruong", tb_ChuyenBay.MaChuyenBay);
             return View(tb_ChuyenBay);
         }
 
@@ -112,6 +127,43 @@ namespace DatVe.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public JsonResult GetSanBayByTuyenBay(int maTuyenBay)
+        {
+            var sanBay = db.tb_TuyenBay
+                            .Where(tb => tb.MaTuyenBay == maTuyenBay)
+                            .Select(tb => new { tb.MaSanBayDi, tb.MaSanBayDen })
+                            .FirstOrDefault();
+
+            var sanBayDi = db.tb_SanBay.Find(sanBay.MaSanBayDi);
+            var sanBayDen = db.tb_SanBay.Find(sanBay.MaSanBayDen);
+
+            var result = new
+            {
+                DiaDiemDi = new { MaSanBay = sanBayDi.MaSanBay, TenSanBay = sanBayDi.ThanhPho },
+                DiaDiemDen = new { MaSanBay = sanBayDen.MaSanBay, TenSanBay = sanBayDen.ThanhPho }
+            };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetGheByChuyenBay(int MaMayBay)
+        {
+            var ghe = db.tb_MayBay
+                            .Where(mb => mb.MaMayBay == MaMayBay)
+                            .Select(mb => new {
+                                mb.SoGheHangNhat,
+                                mb.SoGheHangThuongGia,
+                                mb.SoGheHangPTDB,
+                                mb.SoGheHangPT
+                            })
+                            .FirstOrDefault();
+           
+
+            return Json(ghe, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {
