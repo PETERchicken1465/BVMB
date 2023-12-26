@@ -24,25 +24,18 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 
 <body>
-    <div id="booking" class="section">
-        <div class="section-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="booking-cta">
-                            <h1>Book your flight today</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
-                        </div>
-                    </div>
-                         @RenderBody()
-                </div>
-            </div>
-        </div>
-    </div>
+
+   
+                    @RenderBody()
+               
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

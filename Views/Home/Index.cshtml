@@ -1,118 +1,185 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<div id="booking" class="section">
+    <div class="section-center">
+        <div class="container">
 
-<div class="col-md-7 col-md-offset-1">
-    <div class="booking-form">
-        <form>
-            <div class="form-group">
-                <div class="form-checkbox">
-                    <label for="roundtrip">
-                        <input type="radio" id="roundtrip" name="flight-type" onclick="show()" checked>
-                        <span></span>Khứ hồi
-                    </label>
-                    <label for="one-way">
-                        <input type="radio" id="one-way" name="flight-type" onclick="hide()">
-                        <span></span>Một Chiều
-                    </label>
-                    
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <span class="form-label">Từ</span>
-                        <input class="form-control" type="text" placeholder="Điểm Khởi Hành" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <span class="form-label">Đến</span>
-                        <input class="form-control" type="text" placeholder="Điểm Đến" required title="Vui lòng chọn điểm đến">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <span class="form-label">Khởi hành</span>
-                        <input class="form-control" type="date" required title="Vui lòng chọn ngày khởi hàng">
-                    </div>
-                </div>
-                <div class="col-md-6" id="returnDateContainer">
-                    <div class="form-group">
-                        <span class="form-label">Ngày về</span>
-                        <input class="form-control" type="date" required title="Vui lòng chọn ngày về">
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <span class="form-label">Adults (18+)</span>
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>                           
-                        </select>
-                        <span class="select-arrow"></span>
+                    <div class="booking-cta">
+                        <h1>Hành Trình Phiêu Lưu cùng Cloud_ABC</h1>
+                        <p>Khám phá bầu trời và đặt ngay hôm nay. Hãy tận hưởng vào những chuyến đi tuyệt vời với Cloud_ABC.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <span class="form-label">Children (0-17)</span>
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                        </select>
-                        <span class="select-arrow"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <span class="form-label">Travel class</span>
-                        <select class="form-control">
-                            <option>Hạng Phổ Thông </option>
-                            <option>Hạng Thương Gia</option>
-                            <option>Hạng Nhất</option>
-                        </select>
-                        <span class="select-arrow"></span>
-                    </div>
+                <div class="col-md-7 col-md-offset-1">
+                    <div class="booking-form">
+                        @using(Html.BeginForm("TimChuyenBay", "Home", FormMethod.Post))
+                        {
+                            <form>
+                                <div class="form-group">
+                                    <div class="form-checkbox">
+                                        <label for="roundtrip">
+                                            <input type="radio" id="roundtrip" name="flight-type" onclick="show()" checked>
+                                            <span></span>Khứ hồi
+                                        </label>
+                                        <label for="one-way">
+                                            <input type="radio" id="one-way" name="flight-type" onclick="hide()">
+                                            <span></span>Một Chiều
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Từ</span>
+                                            @Html.DropDownList("dssanbayFrom", ViewBag.dssanbay as SelectList, "Điểm Khởi Hành", new { @class = "form-control airport-dropdown", required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Đến</span>
+                                            @Html.DropDownList("dssanbayTo", ViewBag.dssanbay as SelectList, "Điểm Đến", new { @class = "form-control airport-dropdown", required = "required" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <span class="form-label">Khởi hành</span>
+                                            <input class="form-control" type="date" name="daytu" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="ngayve">
+                                        <div class="form-group">
+                                            <span class="form-label">Ngày về</span>
+                                            <input class="form-control" type="date" name="dayden" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <span class="form-label">Người Lớn</span>
+                                            <select class="form-control" id="adults"  name="nguoilon">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+
+                                            </select>
+                                            <span class="select-arrow"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <span class="form-label">Children (0-17)</span>
+                                            <select class="form-control" id="children" name="treem">
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+
+                                            </select>
+                                            <span class="select-arrow"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <span class="form-label">Travel class</span>
+                                            <select class="form-control">
+                                                <option>Hạng Phổ Thông </option>
+                                                <option>Hạng Thương Gia</option>
+                                                <option>Hạng Nhất</option>
+                                            </select>
+                                            <span class="select-arrow"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-btn">
+                                    <button class="submit-btn">TÌM CHUYẾN BAY</button>
+                                </div>
+                            </form>
+                        }
+                        </div>
                 </div>
             </div>
-            <div class="form-btn">
-                <button class="submit-btn">TÌM CHUYẾN BAY</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 <script>
+
     function hide() {
-        var returnDateContainer = document.getElementById("returnDateContainer");
-        // Check if the "Một Chiều" radio button is selected
-        if (document.getElementById("one-way").checked) {      
-            returnDateContainer.style.display = "none";
-        } else {   
-            returnDateContainer.style.display = "block";
+        var ngayve = document.getElementById("ngayve");
+        if (document.getElementById("one-way").checked) {
+            ngayve.style.display = "none";
+            ngayVeInput.removeAttribute("min");
+        } else {
+            ngayve.style.display = "block";
+            ngayVe.setAttribute("min", "@DateTime.Now.ToString("yyyy-MM-dd")");
         }
     }
     function show() {
-        var returnDateContainer = document.getElementById("returnDateContainer");
-        returnDateContainer.style.display = "block";
+        var ngayve = document.getElementById("ngayve");
+        ngayve.style.display = "block";
     }
+    document.addEventListener("DOMContentLoaded", function () {
+        var adultsSelect = document.getElementById("adults");
+        var childrenSelect = document.getElementById("children");
+        var max = 9;
+        adultsSelect.addEventListener("change", updateTotal);
+        childrenSelect.addEventListener("change", updateTotal);
+
+        function updateTotal() {
+            var adultsValue = parseInt(adultsSelect.value, 10);
+            var childrenValue = parseInt(childrenSelect.value, 10);
+
+            if (adultsValue + childrenValue > max) {
+
+                if (adultsValue > max) {
+                    adultsValue = max;
+                }
+                childrenValue = max - adultsValue;
+            }
+            adultsSelect.value = adultsValue;
+            childrenSelect.value = childrenValue;
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        var airportDropdowns = document.querySelectorAll(".airport-dropdown");
+
+        airportDropdowns.forEach(function (dropdown) {
+            dropdown.addEventListener("change", function () {
+                var selectedValue = dropdown.value;
+
+                // Loop through all dropdowns
+                airportDropdowns.forEach(function (otherDropdown) {
+                    if (otherDropdown !== dropdown) {
+
+                        for (var i = 0; i < otherDropdown.options.length; i++) {
+                            if (otherDropdown.options[i].value === selectedValue) {
+                                otherDropdown.remove(i);
+                                break;
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    });
+
+
 </script>

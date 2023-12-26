@@ -144,6 +144,7 @@
     <Compile Include="Areas\Admin\Controllers\SanBayController.cs" />
     <Compile Include="Areas\Admin\Controllers\testController.cs" />
     <Compile Include="Areas\Admin\Controllers\TuyenbayController.cs" />
+    <Compile Include="Controllers\ChoNgoiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1643,6 +1644,7 @@
     <Content Include="Content\Client1\css\bootstrap.min.css" />
     <Content Include="Content\Client1\css\style.css" />
     <Content Include="Content\Client1\img\background.jpg" />
+    <Content Include="Content\Client1\loadcss.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -2015,10 +2017,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\TimKiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\ChoNgoi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
