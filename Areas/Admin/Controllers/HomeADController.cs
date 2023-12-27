@@ -32,7 +32,7 @@ namespace DatVe.Areas.Admin.Controllers
             var sMatKhau = f["Password"];
 
 
-            if (String.IsNullOrEmpty(sSDT) || sSDT.Length < 11)
+            if (String.IsNullOrEmpty(sSDT) || sSDT.Length < 10)
             {
 
                 ViewData["loli1"] = "Phải nhập SDT chính xác";
@@ -49,6 +49,7 @@ namespace DatVe.Areas.Admin.Controllers
                 if (ad != null)
                 {
                     Session["TenDNAdmin"] = ad;
+                    Session["ten"] = ad.TenNhanVien;
 
                     return RedirectToAction("Index", "HomeAD");
                 }
@@ -60,6 +61,13 @@ namespace DatVe.Areas.Admin.Controllers
                 }
             }
             return View();
+        }
+        public ActionResult Logout()
+        {
+
+            Session.Abandon();
+            ViewBag.Ten = "";
+            return Redirect("Login");
         }
 
     }

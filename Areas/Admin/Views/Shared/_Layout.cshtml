@@ -24,6 +24,10 @@
     <link rel="shortcut icon" href="~/Content/Admin/template/images/favicon.png" />
 </head>
 <body>
+    @if (Session["TenDNAdmin"] == null)
+    {
+        Response.Redirect("/Admin/HomeAD/Login");
+    }
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
@@ -133,11 +137,14 @@
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
                                 <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                                <p class="mb-1 mt-3 font-weight-semibold">Admin Tuan</p>
+                                <p class="mb-1 mt-3 font-weight-semibold">
+                                    @if (Session["ten"] != null)
+                                    {@Session["ten"].ToString();
+                                }  </p>
                                 <p class="fw-light text-muted mb-0">ABCo@gmail.com</p>
                             </div>
                             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Trang Cá nhân <span class="badge badge-pill badge-danger">1</span></a>
-                              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Đăng xuất</a>
+                            <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Đăng xuất</a>
                         </div>
                     </li>
                 </ul>
@@ -149,7 +156,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_settings-panel.html -->
-      
+
             <div id="right-sidebar" class="settings-panel">
                 <i class="settings-close ti-close"></i>
                 <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -308,8 +315,7 @@
         </div>
         <!-- content-wrapper ends -->
         <!-- partial -->
-
-    <!-- page-body-wrapper ends -->
+        <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
