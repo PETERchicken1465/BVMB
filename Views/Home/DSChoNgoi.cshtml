@@ -1,0 +1,101 @@
+﻿@model IEnumerable<DatVe.Models.tb_Ghe>
+@{
+    ViewBag.Title = "DSChoNgoi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+
+@{
+    var groupedData = Model.GroupBy(g => g.DayGhe);
+}
+<link type="text/css" rel="stylesheet" href="~/Content/Client1/loadcss.css" />
+<style>
+    .gradient-custom {
+        background: #6a11cb;
+        background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+
+    .seat {
+        width: 28px;
+        height: 28px;
+        margin: 2px;
+        display: inline-block;
+        background-color: #ccc;
+        border: 1px solid #aaa;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        color: #333;
+        text-decoration: auto;
+    }
+
+    .seat-container {
+        max-height: 500px; /* Đặt chiều cao tối đa của container */
+        overflow-y: auto;
+    }
+   
+</style>
+<section class="h-100 gradient-custom">
+    <span class="loader" id="loader"></span>
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Thông tin vé </h5>
+                    </div>
+                    <div class="card-body" id="chuyenBayDataContainer" style="display: none;">
+                        <div class="seat-container">
+                            <div class="row">
+                                @foreach (var group in groupedData)
+                                {
+
+                                    <div class="col" id="@("col" + i++)">
+                                        @foreach (var item in group)
+                                        {
+                                            <a class="seat" role="button" onclick="ChonChoNgoi(@item.MaGhe)">
+                                                <p>@String.Concat(item.DayGhe.Trim(), item.SoGhe)</p>
+                                            </a>
+                                        }
+                                    </div>
+                                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                    <script>
+                                        function themGioHang(MaGhe) {
+                                            alert('Đã chọn ghế: ' + MaGhe)
+                                             $.ajax({
+                                                 url: '@Url.Action("ChonChoNgoi", "Home")',
+                                                 type: 'POST',
+                                                 data: { id: MaGhe},
+                                                 success: function (result) {
+                                                     if (result.Success) {
+                                                         alert(result.Message);
+                                                         location.reload()
+                                                     } else {
+                                                         alert('Lỗi.Thử Lại sau.');                                            }
+                                                 },
+                                                 error: function () {
+                                                     alert('Đã xảy ra lỗi.Thử Lại sau.');
+                                                 }
+                                             });
+                                         }
+                                  </script>
+                                }
+                            </div>
+                        </div>                       
+                        <script>
+                            setTimeout(function () {
+                                var loader = document.getElementById("loader");
+                                var chuyenBayDataContainer = document.getElementById("chuyenBayDataContainer");
+                                loader.style.display = "none";
+                                chuyenBayDataContainer.style.display = "block";
+                            }, 1000);
+                        </script>
+                    </div>
+                </div>
+
+            </div>
+            @Html.Action("GioHangPartial", "Home")
+        </div>
+    </div>
+</section>

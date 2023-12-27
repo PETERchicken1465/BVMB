@@ -142,9 +142,7 @@
     <Compile Include="Areas\Admin\Controllers\NguoiDaiDienController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhanvienController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanBayController.cs" />
-    <Compile Include="Areas\Admin\Controllers\testController.cs" />
     <Compile Include="Areas\Admin\Controllers\TuyenbayController.cs" />
-    <Compile Include="Controllers\ChoNgoiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -164,6 +162,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatVeDBContent.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Giohang.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>DatVeDBContent.tt</DependentUpon>
     </Compile>
@@ -2017,7 +2016,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\TimKiem.cshtml" />
+    <Content Include="Views\Home\TimChuyenBay.cshtml" />
+    <Content Include="Views\Home\GioHangPartial.cshtml" />
+    <Content Include="Views\Home\DSChoNgoi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

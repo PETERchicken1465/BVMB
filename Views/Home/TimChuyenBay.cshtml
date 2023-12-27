@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "TimChuyenBay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var chuyenBayData = ViewBag.ChuyenBayData as List<DatVe.Models.tb_ChuyenBay>;   
+
+}
+
+<link type="text/css" rel="stylesheet" href="~/Content/Client1/loadcss.css" />
+<style>
+    .gradient-custom {
+        background: #6a11cb;
+        background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+</style>
+<section class="h-100 gradient-custom">
+    <span class="loader" id="loader"></span>
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Thông tin vé </h5>
+                    </div>
+                    <div class="card-body" id="chuyenBayDataContainer" style="display: none;">
+                        @if (chuyenBayData != null && chuyenBayData.Count > 0)
+                        {
+
+                            foreach (var chuyenBay in chuyenBayData)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                        <h2 name="selectedTickets"> @chuyenBay.ThoiGianBay.Value.ToString("HH:mm") đến @chuyenBay.ThoiGianHaCanh.Value.ToString("HH:mm")</h2>
+                                        <p name="selectedTickets">@chuyenBay.tb_MayBay.SoHieu</p>
+                                        <p name="selectedTickets">@chuyenBay.tb_MayBay.LoaiMayBay</p>
+
+                                    </div>
+
+                                    <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                        <!-- Data -->
+                                        <h3 name="selectedTickets"> @chuyenBay.NgayCatCanh.Value.ToString("dd/MM/yyyy")</h3>
+                                        <h3>Hạng Phổ Thông</h3>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                        <h3 name="selectedTickets">@string.Format("{0:#,##0,0}", chuyenBay.GiaVePhoThong) VND </h3>
+                                    </div>
+                                    <a href="javascript:void(0);" onclick="themGioHang(@chuyenBay.MaChuyenBay,@chuyenBay.MaMayBay)" class="btn btn-outline-success btn-lg btn-block" role="button">Mua</a>
+                                </div>
+                                <hr class="my-4" />
+                            }
+                        }
+                        else
+                        {
+                            <script>
+                                alert("Quý khách vui lòng thử lại sau ! Xin cám ơn 🙇‍");
+                                window.location.href = '/Home/Index';
+                            </script>
+                        }
+                        <!-- Add this script tag to include jQuery -->
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                            function themGioHang(maChuyenBay, MaMayBay) {
+                                    // Make an AJAX request to the controller action
+                                    $.ajax({
+                                        url: '@Url.Action("ThemGioHang", "Home")',
+                                        type: 'POST', 
+                                        data: { ms: maChuyenBay },
+                                        success: function (result) {                                          
+                                            if (result.Success) {
+                                                alert(result.Message);                                            
+                                                location.reload()
+                                                window.location.href = '/Home/DSChoNgoi/'+MaMayBay;
+                                            } else {
+                                                alert('Lỗi.Thử Lại sau.');                                            }
+                                        },
+                                        error: function () {
+                                            alert('Đã xảy ra lỗi.Thử Lại sau.');
+                                        }
+                                    });
+                                }
+                        </script>
+                        <script>
+                            setTimeout(function () {
+                                var loader = document.getElementById("loader");
+                                var chuyenBayDataContainer = document.getElementById("chuyenBayDataContainer");
+                                loader.style.display = "none";
+                                chuyenBayDataContainer.style.display = "block";
+                            }, 1000);
+                        </script>
+                    </div>
+                </div>
+
+            </div>
+            @Html.Action("GioHangPartial", "Home")
+        </div>
+    </div>
+</section>

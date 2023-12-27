@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home Page";   
 }
 <div id="booking" class="section">
     <div class="section-center">
@@ -14,17 +14,17 @@
                 </div>
                 <div class="col-md-7 col-md-offset-1">
                     <div class="booking-form">
-                        @using(Html.BeginForm("TimChuyenBay", "Home", FormMethod.Post))
+                        @using (Html.BeginForm("TimChuyenBay", "Home", FormMethod.Post))
                         {
                             <form>
                                 <div class="form-group">
                                     <div class="form-checkbox">
                                         <label for="roundtrip">
-                                            <input type="radio" id="roundtrip" name="flight-type" onclick="show()" checked>
+                                            <input type="radio" id="roundtrip" name="typeR" onclick="show()" checked>
                                             <span></span>Khứ hồi
                                         </label>
                                         <label for="one-way">
-                                            <input type="radio" id="one-way" name="flight-type" onclick="hide()">
+                                            <input type="radio" id="one-way" name="typeO" onclick="hide()">
                                             <span></span>Một Chiều
                                         </label>
 
@@ -48,13 +48,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <span class="form-label">Khởi hành</span>
-                                            <input class="form-control" type="date" name="daytu" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                            <input class="form-control" type="date" name="ngaydi" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
                                         </div>
                                     </div>
                                     <div class="col-md-6" id="ngayve">
                                         <div class="form-group">
                                             <span class="form-label">Ngày về</span>
-                                            <input class="form-control" type="date" name="dayden" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                            <input class="form-control" type="date" name="ngayve" min="@DateTime.Now.ToString("yyyy-MM-dd")">
                                         </div>
                                     </div>
                                 </div>
@@ -122,20 +122,30 @@
 </div>
 <script>
 
-    function hide() {
-        var ngayve = document.getElementById("ngayve");
-        if (document.getElementById("one-way").checked) {
-            ngayve.style.display = "none";
-            ngayVeInput.removeAttribute("min");
-        } else {
-            ngayve.style.display = "block";
-            ngayVe.setAttribute("min", "@DateTime.Now.ToString("yyyy-MM-dd")");
-        }
-    }
-    function show() {
-        var ngayve = document.getElementById("ngayve");
+  function hide() {
+    var ngayve = document.getElementById("ngayve");
+      var ngayVeInput = document.querySelector('#ngayve input[type="date"]');  
+      var khuhoi = document.getElementById("roundtrip");
+
+    if (document.getElementById("one-way").checked) {
+        ngayve.style.display = "none";
+        ngayVeInput.removeAttribute("min");
+        ngayve.setAttribute("aria-required", "false");
+        khuhoi.checked = false;
+    } else {
         ngayve.style.display = "block";
+        ngayVeInput.setAttribute("min", "@DateTime.Now.ToString("yyyy-MM-dd")");
+     
     }
+}    function show() {
+    var ngayve = document.getElementById("ngayve"); 
+    var khuhoi = document.getElementById("one-way");
+    var ngayVeInput = document.querySelector('#ngayve input[type="date"]');
+    ngayve.style.display = "block";
+    ngayVeInput.setAttribute("min", "@DateTime.Now.ToString("yyyy-MM-dd")");    
+    khuhoi.checked = false;
+}
+
     document.addEventListener("DOMContentLoaded", function () {
         var adultsSelect = document.getElementById("adults");
         var childrenSelect = document.getElementById("children");
@@ -159,26 +169,27 @@
         }
     });
     document.addEventListener("DOMContentLoaded", function () {
-        var airportDropdowns = document.querySelectorAll(".airport-dropdown");
+        var fromDropdown = document.getElementById("dssanbayFrom");
+        var toDropdown = document.getElementById("dssanbayTo");
 
-        airportDropdowns.forEach(function (dropdown) {
-            dropdown.addEventListener("change", function () {
-                var selectedValue = dropdown.value;
-
-                // Loop through all dropdowns
-                airportDropdowns.forEach(function (otherDropdown) {
-                    if (otherDropdown !== dropdown) {
-
-                        for (var i = 0; i < otherDropdown.options.length; i++) {
-                            if (otherDropdown.options[i].value === selectedValue) {
-                                otherDropdown.remove(i);
-                                break;
-                            }
-                        }
-                    }
-                });
-            });
+        fromDropdown.addEventListener("change", function () {
+            checkDropdownValues();
         });
+
+        toDropdown.addEventListener("change", function () {
+            checkDropdownValues();
+        });
+
+        function checkDropdownValues() {
+            var fromValue = fromDropdown.value;
+            var toValue = toDropdown.value;
+
+            if (fromValue === toValue) {
+              
+                toDropdown.value = "";
+                alert("Điểm Khởi Hành và Điểm Đến không thể giống nhau.");
+            }
+        }
     });
 
 

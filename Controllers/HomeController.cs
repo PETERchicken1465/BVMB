@@ -2,14 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Runtime.CompilerServices;
 using System.Web.Mvc;
 
 namespace DatVe.Controllers
 {
     public class HomeController : Controller
     {
-        private BanVeMayBayEntities db = new BanVeMayBayEntities();
+        private BanVeMayBayEntities db = new BanVeMayBayEntities();       
         public ActionResult Index()
         {
             List<tb_SanBay> sanBayList = GetSanBayList();
@@ -21,66 +21,141 @@ namespace DatVe.Controllers
         {
             return db.tb_SanBay.ToList();
 
-        }
+        }   
         public ActionResult TimChuyenBay()
-        { return View(); }  
+        { return View(); }
         [HttpPost]
         public ActionResult TimChuyenBay(FormCollection f)
         {
-            //var flight-type = f["UserName"]
-            //var dssanbayFrom = f["UserName"];
-            //var dssanbayTo = f["UserName"];
-            //var departureDate = f["UserName"];
-            //var returnDate = f["UserName"];
-            //var adults = f["UserName"];
-            //var children = f["UserName"];
+            var typeR = f["typeR"];
+            var typeO = f["typeO"];
+            int dssanbayFrom = int.Parse(f["dssanbayFrom"]);
+            int dssanbayTo = int.Parse(f["dssanbayTo"]);
+            DateTime departureDate = DateTime.Parse(f["ngaydi"]);
+            int adults = int.Parse(f["nguoilon"]);
+            int children = int.Parse(f["treem"]);
+            if (typeR == "on")
+            {
+                DateTime returnDate = DateTime.Parse(f["ngayve"]);
 
-            //if (string.IsNullOrEmpty(dssanbayFrom) || string.IsNullOrEmpty(dssanbayTo) || string.IsNullOrEmpty(departureDate) || adults <= 0 || children < 0 || string.IsNullOrEmpty(travelClass))
-            //{               
-            //    ViewBag.ErrorMessage = "Vui lòng nhập đầy đủ thông tin và đúng định dạng.";
-            //    return View("Error");
-            //}        
+                if (!int.TryParse(f["dssanbayFrom"], out dssanbayFrom) ||
+                                 !int.TryParse(f["dssanbayTo"], out dssanbayTo) ||
+                                 !DateTime.TryParse(f["ngaydi"], out departureDate) ||
+                                 !DateTime.TryParse(f["ngayve"], out returnDate) ||
+                                 !int.TryParse(f["nguoilon"], out adults) ||
+                                 !int.TryParse(f["treem"], out children))
+                {
+                    ViewBag.ErrorMessage = "Vui lòng nhập đầy đủ thông tin";
+                    return View("Error");
+                }
 
+                int sluong = adults + children;
+                var tb = db.tb_TuyenBay.SingleOrDefault(n => n.MaSanBayDi == dssanbayFrom && n.MaSanBayDen == dssanbayTo);
+                var cb = db.tb_ChuyenBay.Where(n => n.MaTuyenBay == tb.MaTuyenBay && n.NgayCatCanh == departureDate);
+                ViewBag.ChuyenBayData = cb;
+                ViewBag.sl = sluong;
+                return View();
+            }
+            else if (typeO == "on")
+            {
+                if (!int.TryParse(f["dssanbayFrom"], out dssanbayFrom) ||
+                            !int.TryParse(f["dssanbayTo"], out dssanbayTo) ||
+                            !DateTime.TryParse(f["ngaydi"], out departureDate) ||
+                                            !int.TryParse(f["nguoilon"], out adults) ||
+                                                     !int.TryParse(f["treem"], out children))
+                {
+                    ViewBag.ErrorMessage = "Vui lòng nhập đầy đủ thông tin";
+                    return View("Error");
+                }
 
-
-            //if (String.IsNullOrEmpty(sTenDN))
-            //{
-
-            //    ViewData["loli1"] = "Phải nhập địa chỉ email";
-            //}
-            //else if (String.IsNullOrEmpty(sMatKhau))
-            //{
-
-            //    ViewData["loli2"] = "Phải nhập mật khẩu";
-            //}
-            //else
-            //{
-            //    var ad = db.Customers.SingleOrDefault(n => n.Email == sTenDN && n.Password == sMatKhau);
-
-            //    if (ad != null)
-            //    {
-            //        Session["TenDN"] = ad;
-            //        Session["ten"] = ad.Name;
-            //        Session["ID"] = ad.ID;
-            //        string preURL = System.Web.HttpContext.Current.Request.UrlReferrer.ToString();
-            //        if (!string.IsNullOrEmpty(preURL) && Url.IsLocalUrl(preURL))
-            //        {
-            //            return Redirect(preURL);
-            //        }
-            //        return RedirectToAction("Index", "Home");
-
-            //    }
-
-            //    else
-            //    {
-            //        ViewBag.ThongBao = "Email hoặc Mật Khẩu không đúng";
-            //        return View("Login");
-            //    }
-            //}
-            //return View();
+                int sluong = children + adults;
+                var tb = db.tb_TuyenBay.SingleOrDefault(n => n.MaSanBayDi == dssanbayFrom && n.MaSanBayDen == dssanbayTo);
+                var cb = db.tb_ChuyenBay.Where(n => n.MaTuyenBay == tb.MaTuyenBay && n.NgayCatCanh == departureDate);
+                ViewBag.ChuyenBayData = cb.ToList();
+                Session["sl"] = sluong;
+                return View();
+            }
             return View();
         }
+        public ActionResult DSChoNgoi(int id)
+        {
+            return View(db.tb_Ghe.Where(n => n.MaMayBay == id).ToList());
+        }
+        [HttpPost]
+        public ActionResult ChonChoNgoi(int id)
+        {
 
+            return View(); 
+        }
+        #region GioHang
+        public List<Giohang> LayGioHang()
+        {
+            List<Giohang> lstGioHang = Session["GioHang"] as List<Giohang>;
+            if (lstGioHang == null)
+            {
+                lstGioHang = new List<Giohang>();
+                Session["GioHang"] = lstGioHang;
+            }
+            return lstGioHang;
+        }
+
+        public JsonResult ThemGioHang(int ms)
+        {
+            List<Giohang> gioHang = LayGioHang();
+            Giohang sp = gioHang.Find(n => n.MaChuyenBay == ms);
+
+            if (sp == null)
+            {
+                sp = new Giohang(ms);
+                sp.Soluong = (int)Session["sl"];
+                gioHang.Add(sp);
+            }
+            else
+            {
+                sp.Soluong++;
+            }
+
+            var result = new
+            {
+                Success = true,
+                Message = "Mua vé thành công ",
+                TotalItems = gioHang.Count
+            };
+
+            return Json(result);
+        }
+
+        public int TongSoLuong()     {          
+            int dTongsl = 0;
+            List<Giohang> lstGioHang = Session["GioHang"] as List<Giohang>;
+            {
+                if (lstGioHang != null)
+                    dTongsl = lstGioHang.Sum(n => n.Soluong);
+
+            }
+            return dTongsl;
+        }
+
+        public double TongTien()
+        {
+            double dTongTien = 0;
+            List<Giohang> lstGioHang = Session["GioHang"] as List<Giohang>;
+            {
+                if (lstGioHang != null)
+                    dTongTien = lstGioHang.Sum(n => n.Thanhtien);
+
+            }
+            return dTongTien;
+        }
+
+        public ActionResult GioHangPartial()
+        {
+            List<Giohang> lstgiohang = LayGioHang();
+            ViewBag.TongSoLuong = TongSoLuong();
+            ViewBag.TongTien = TongTien();           
+            return PartialView(lstgiohang);
+        }
+        #endregion
 
     }
 }
