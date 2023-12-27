@@ -10,6 +10,8 @@ namespace DatVe.Models
         private BanVeMayBayEntities db = new BanVeMayBayEntities();
         public int MaChuyenBay { get; set; }
         public int MaMayBay { get; set; }
+        public int MaGhe { get; set; }
+        public string hotenkh { get; set; }
         public string LoaiMayBay { get; set; }
         public string SoHieu { get; set; }
         public string DiemDen { get; set; }
@@ -30,7 +32,9 @@ namespace DatVe.Models
         {
             MaChuyenBay = ms;
             tb_ChuyenBay s = db.tb_ChuyenBay.Single(n => n.MaChuyenBay == MaChuyenBay);
-            MaMayBay= (int)s.MaMayBay;
+            MaMayBay = (int)s.MaMayBay;
+            MaGhe = 0;
+            hotenkh = "";
             LoaiMayBay = s.tb_MayBay.LoaiMayBay;
             SoHieu = s.tb_MayBay.SoHieu;
             ThoiGianHaCanh = DateTime.Parse(s.ThoiGianHaCanh.ToString());

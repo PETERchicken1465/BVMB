@@ -36,6 +36,7 @@
     }
    
 </style>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <section class="h-100 gradient-custom">
     <span class="loader" id="loader"></span>
     <div class="container py-5">
@@ -43,7 +44,7 @@
             <div class="col-md-8">
                 <div class="card mb-4">
                     <div class="card-header py-3">
-                        <h5 class="mb-0">Thông tin vé </h5>
+                        <h3 class="mb-0">Chọn vị trí ngồi  </h3>
                     </div>
                     <div class="card-body" id="chuyenBayDataContainer" style="display: none;">
                         <div class="seat-container">
@@ -54,31 +55,31 @@
                                     <div class="col" id="@("col" + i++)">
                                         @foreach (var item in group)
                                         {
-                                            <a class="seat" role="button" onclick="ChonChoNgoi(@item.MaGhe)">
+                                            <a class="seat" role="button" onclick="ChonChoNgoi('@item.tb_MayBay.MaMayBay','@item.MaGhe','@item.DayGhe','@item.SoGhe')">
                                                 <p>@String.Concat(item.DayGhe.Trim(), item.SoGhe)</p>
                                             </a>
                                         }
-                                    </div>
-                                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                    </div>                                    
                                     <script>
-                                        function themGioHang(MaGhe) {
-                                            alert('Đã chọn ghế: ' + MaGhe)
-                                             $.ajax({
-                                                 url: '@Url.Action("ChonChoNgoi", "Home")',
-                                                 type: 'POST',
-                                                 data: { id: MaGhe},
-                                                 success: function (result) {
-                                                     if (result.Success) {
-                                                         alert(result.Message);
-                                                         location.reload()
-                                                     } else {
-                                                         alert('Lỗi.Thử Lại sau.');                                            }
-                                                 },
-                                                 error: function () {
-                                                     alert('Đã xảy ra lỗi.Thử Lại sau.');
-                                                 }
-                                             });
-                                         }
+                                         function ChonChoNgoi(MaMayBay,MaGhe,DayGhe,SoGhe) {                                                
+                                                $.ajax({
+                                                    url: '@Url.Action("ChonChoNgoi", "Home")',
+                                                    type: 'POST',
+                                                    data: { id: MaMayBay, ghe: MaGhe, DG: DayGhe, SG: SoGhe },
+                                                    success: function (result) {
+                                                        if (result.Success) {
+                                                            alert(result.Message);
+                                                            location.reload()
+                                                            window.location.href = '/Home/DangKy';
+                                                        } else {
+                                                            alert('Lỗi. Thử Lại sau.');
+                                                        }
+                                                    },
+                                                    error: function () {
+                                                        alert('Đã xảy ra lỗi. Thử Lại sau.');
+                                                    }
+                                                });
+                                            }                                   
                                   </script>
                                 }
                             </div>

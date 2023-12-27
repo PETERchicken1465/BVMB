@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "XacNhanDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link type="text/css" rel="stylesheet" href="~/Content/Client1/loadcss.css" />
+<style>
+    .gradient-custom {
+        background: #6a11cb;
+        background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }   
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<section class="h-100 gradient-custom">
+    <span class="loader" id="loader"></span>
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h2 class="mb-0">THÔNG BÁO  </h2>
+                    </div>
+                    <div class="card-body" id="chuyenBayDataContainer" style="display: none;">
+                        <h2>XÁC NHẬN THÀNH CÔNG</h2>
+
+                        <p>Vé của bạn đã được ghi nhận. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
+
+                        <p>Cảm ơn bạn đã mua sắm tại cửa hàng chúng tôi.</p>
+                        <p class="text-center">@Html.ActionLink("Về Trang chủ", "Index", "Home",null, new { @class = "btn btn-light" })</p>
+                        <script>
+                            setTimeout(function () {
+                                var loader = document.getElementById("loader");
+                                var chuyenBayDataContainer = document.getElementById("chuyenBayDataContainer");
+                                loader.style.display = "none";
+                                chuyenBayDataContainer.style.display = "block";
+                            }, 1000);
+                        </script>
+                    </div>
+                </div>
+            </div>       
+        </div>
+    </div>
+</section>
+
+

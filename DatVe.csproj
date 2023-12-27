@@ -2019,11 +2019,13 @@
     <Content Include="Views\Home\TimChuyenBay.cshtml" />
     <Content Include="Views\Home\GioHangPartial.cshtml" />
     <Content Include="Views\Home\DSChoNgoi.cshtml" />
+    <Content Include="Views\Home\DangKy.cshtml" />
+    <Content Include="Views\Home\DatHang.cshtml" />
+    <Content Include="Views\Home\XacNhanDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Views\ChoNgoi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

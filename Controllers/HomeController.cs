@@ -37,7 +37,6 @@ namespace DatVe.Controllers
             if (typeR == "on")
             {
                 DateTime returnDate = DateTime.Parse(f["ngayve"]);
-
                 if (!int.TryParse(f["dssanbayFrom"], out dssanbayFrom) ||
                                  !int.TryParse(f["dssanbayTo"], out dssanbayTo) ||
                                  !DateTime.TryParse(f["ngaydi"], out departureDate) ||
@@ -77,16 +76,80 @@ namespace DatVe.Controllers
             }
             return View();
         }
+        #region ChoNgoi
         public ActionResult DSChoNgoi(int id)
         {
             return View(db.tb_Ghe.Where(n => n.MaMayBay == id).ToList());
         }
         [HttpPost]
-        public ActionResult ChonChoNgoi(int id)
+        public JsonResult ChonChoNgoi(int id, int ghe, string DG, int SG)
         {
-
-            return View(); 
+            List<Giohang> lstGioHang = LayGioHang();
+            Giohang sp = lstGioHang.SingleOrDefault(n => n.MaMayBay == id);
+            if (sp != null)
+            {
+                sp.MaGhe = ghe;
+                string ngoi = string.Concat(DG, SG);
+                sp.ChoNgoi = ngoi;
+            }
+            var result = new
+            {
+                Success = true,
+                Message = "Lưu chỗ thành công"
+            };
+            return Json(result);
         }
+        #endregion
+
+        #region DangKy
+        public ActionResult DangKy()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DangKy(FormCollection f, tb_KhachHang kh)
+        {
+            var HoTen = f["HoTen"];
+            var GT = f["GioiTinh"];
+            var tuoi = f["Tuoi"];
+            var sEmail = f["Email"];
+            var sDienThoai = f["SoDienThoai"];
+
+            if (string.IsNullOrEmpty(HoTen))
+            {
+                ViewData["err1"] = "Họ tên không được để trống";
+            }
+            else if (string.IsNullOrEmpty(sEmail))
+            {
+                ViewData["err2"] = "Email không được để trống";
+            }
+            else if (string.IsNullOrEmpty(sDienThoai))
+            {
+                ViewData["err3"] = "Số điện thoại không được để trống";
+            }
+            else if (sDienThoai.Length < 10 || sDienThoai.Length > 10)
+            {
+                ViewData["err4"] = "Vui lòng nhập số điện thoại ";
+            }
+            else
+            {
+
+                kh.HovaTen = HoTen;
+                Session["TaiKhoan"] = HoTen;               
+                kh.GioiTinh = GT;
+                kh.Tuoi = int.Parse(tuoi);
+                kh.Email = sEmail;
+                kh.SDT = sDienThoai;
+                kh.QuocTich = "VietNam";
+                kh.Passport_number = "0123456789963";
+                db.tb_KhachHang.Add(kh);
+                db.SaveChanges();
+                return Redirect("/Home/DatHang");
+
+            }
+            return this.DangKy();
+        }
+        #endregion
         #region GioHang
         public List<Giohang> LayGioHang()
         {
@@ -156,6 +219,52 @@ namespace DatVe.Controllers
             return PartialView(lstgiohang);
         }
         #endregion
+        [HttpGet]
+        public ActionResult DatHang()
+        {           
+            if (Session["GioHang"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            List<Giohang> lstGioHang = LayGioHang();
+            ViewBag.TongSoLuong = TongSoLuong();
+            ViewBag.TongTien = TongTien();
+            return View(lstGioHang);
+        }
 
+        [HttpPost]
+        public ActionResult DatHang(FormCollection f)
+        {
+            // Thêm đơn hàng
+            tb_DatVe ddh = new tb_DatVe();
+            tb_KhachHang kh = (tb_KhachHang)Session["TaiKhoan"];
+            List<Giohang> lstGioHang = LayGioHang();
+
+            ddh.MaKH = kh.MaKhachHang;
+            ddh.NgayDat = DateTime.Now;
+            db.SaveChanges();
+
+            // Thêm chi tiết đơn hàng
+            foreach (var item in lstGioHang)
+            {
+                tb_DatVe ctdh = new tb_DatVe();
+                ctdh.MaNĐD = ddh.MaKH;
+                ctdh.MaGhe = item.MaGhe;
+                ctdh.SoGhe = (int)item.Thanhtien;
+
+                db.tb_DatVe.Add(ctdh);
+            }
+
+            db.SaveChanges();
+
+            Session["GioHang"] = null;
+
+            return RedirectToAction("XacNhanDonHang");
+        }
+        public ActionResult XacNhanDonHang()
+        {
+
+            return View();
+        }
     }
 }

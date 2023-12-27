@@ -8,8 +8,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="booking-cta">
-                        <h1>Hành Trình Phiêu Lưu cùng Cloud_ABC</h1>
-                        <p>Khám phá bầu trời và đặt ngay hôm nay. Hãy tận hưởng vào những chuyến đi tuyệt vời với Cloud_ABC.</p>
+                        <h1>Hành Trình Phiêu Lưu cùng Cloud_AirPlane</h1>
+                        <p>Khám phá bầu trời và đặt ngay hôm nay. Hãy tận hưởng vào những chuyến đi tuyệt vời với Cloud_AirPlane.</p>
                     </div>
                 </div>
                 <div class="col-md-7 col-md-offset-1">
@@ -47,13 +47,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <span class="form-label">Khởi hành</span>
+                                            <span class="form-label">Khởi hành:</span>
                                             <input class="form-control" type="date" name="ngaydi" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
                                         </div>
                                     </div>
                                     <div class="col-md-6" id="ngayve">
                                         <div class="form-group">
-                                            <span class="form-label">Ngày về</span>
+                                            <span class="form-label">Ngày về :@ViewBag.ErrorMessage</span>
                                             <input class="form-control" type="date" name="ngayve" min="@DateTime.Now.ToString("yyyy-MM-dd")">
                                         </div>
                                     </div>
