@@ -21,25 +21,14 @@ namespace DatVe.Areas.Admin.Controllers
             return View(tb_DoiBay.ToList());
         }
 
-        // GET: Admin/DoiBay/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_DoiBay tb_DoiBay = db.tb_DoiBay.Find(id);
-            if (tb_DoiBay == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_DoiBay);
-        }
+       
 
         // GET: Admin/DoiBay/Create
         public ActionResult Create()
         {
             ViewBag.MaDoiBay = new SelectList(db.tb_ChuyenBay, "MaChuyenBay", "NgayCatCanh");
+            ViewBag.CoTruong = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien");
+            ViewBag.CoPho = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien");
             return View();
         }
 
@@ -57,6 +46,8 @@ namespace DatVe.Areas.Admin.Controllers
             }
 
             ViewBag.MaDoiBay = new SelectList(db.tb_ChuyenBay, "MaChuyenBay", "NgayCatCanh", tb_DoiBay.MaDoiBay);
+            ViewBag.CoTruong = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien",tb_DoiBay.CoTruong);
+            ViewBag.CoPho = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien",tb_DoiBay.CoPho);
             return View(tb_DoiBay);
         }
 
@@ -73,6 +64,8 @@ namespace DatVe.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaDoiBay = new SelectList(db.tb_ChuyenBay, "MaChuyenBay", "NgayCatCanh", tb_DoiBay.MaDoiBay);
+            ViewBag.CoTruong = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien", tb_DoiBay.CoTruong);
+            ViewBag.CoPho = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien", tb_DoiBay.CoPho);
             return View(tb_DoiBay);
         }
 
@@ -89,6 +82,8 @@ namespace DatVe.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaDoiBay = new SelectList(db.tb_ChuyenBay, "MaChuyenBay", "NgayCatCanh", tb_DoiBay.MaDoiBay);
+            ViewBag.CoTruong = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien", tb_DoiBay.CoTruong);
+            ViewBag.CoPho = new SelectList(db.tb_NhanVien, "MaNhanVien", "TenNhanVien", tb_DoiBay.CoPho);
             return View(tb_DoiBay);
         }
 

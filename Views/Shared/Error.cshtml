@@ -6,8 +6,14 @@
 </head>
 <body>
     <hgroup>
-        <h1>Lỗi .</h1>
+
         <h2>Vui lòng kiểm tra lại ở phần Controller.</h2>
     </hgroup>
+    @if (ViewData.ModelState.Count > 0)
+    {
+        <div class="alert alert-danger">
+            <strong>Lỗi!</strong> @Html.ValidationSummary(false)
+        </div>
+    }
 </body>
 </html>

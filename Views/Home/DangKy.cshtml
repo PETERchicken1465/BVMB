@@ -59,7 +59,6 @@
             }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <section class="h-100 gradient-custom">
     <span class="loader" id="loader"></span>
     <div class="container py-5">
@@ -71,12 +70,12 @@
                     </div>
                     <div class="card-body" id="chuyenBayDataContainer" style="display: none;">
                         <div class="seat-container">
-                            <div class="registration-form" >                              
+                            <div class="registration-form">
                                 @using (Html.BeginForm("DangKy", "Home", FormMethod.Post))
                                 {
                                     <div class="form-group">
                                         <label for="DX">Danh Xưng :</label>
-                                        <select class="form-control" name="DX">
+                                        <select class="form-control" name="DX" id="DX">
                                             <option>Ông</option>
                                             <option>Bà</option>
                                             <option>Cô/Chị</option>
@@ -89,14 +88,14 @@
                                     </div>
                                     <div class="form-group" id="gioiTinh">
                                         <label for="GioiTinh">Giới Tính</label>
-                                        <select class="form-control" name="GioiTinh">
+                                        <select class="form-control" name="GioiTinh" id="GioiTinh">
                                             <option>Nam</option>
-                                            <option>Nữ</option>                                      
+                                            <option>Nữ</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="Tuoi">Tuổi</label>
-                                        <input type="number" name="Tuoi" required />
+                                        <input type="number" name="Tuoi" min="18" max="150" required />
                                     </div>
                                     <div class="form-group">
                                         <label for="Email">Email:</label>
@@ -113,6 +112,8 @@
                                     </div>
                                 }
                             </div>
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>*
+
                             <script>
                                 setTimeout(function () {
                                     var loader = document.getElementById("loader");
@@ -120,13 +121,13 @@
                                     loader.style.display = "none";
                                     chuyenBayDataContainer.style.display = "block";
                                 }, 1000);
-                                $(document).ready(function () {                                                           
-                                    $('#DX').change(function () {                                      
-                                        var danhXung = $(this).val();                                        
-                                        if (danhXung === 'Cô/Chị' || danhXung === 'Bà') {
-                                            $('#gioiTinh').val ="Nữ";
-                                        } else {                                          
-                                            $('#gioiTinh').val = "Nam";
+                                $(document).ready(function () {
+                                    $('#DX').change(function () {
+                                        var danhXung = $(this).val();
+                                        if (danhXung == 'Cô/Chị' || danhXung == 'Bà') {
+                                            $('#GioiTinh').val = "Nữ";
+                                        } else {
+                                            $('#GioiTinh').val = "Nam";
                                         }
                                     });
                                 });

@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DatVe.Models;
+using PagedList;
 
 namespace DatVe.Areas.Admin.Controllers
 {
@@ -15,11 +17,12 @@ namespace DatVe.Areas.Admin.Controllers
         private BanVeMayBayEntities db = new BanVeMayBayEntities();
 
         // GET: Admin/ChuyenBay
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var tb_ChuyenBay = db.tb_ChuyenBay.Include(t => t.tb_MayBay).Include(t => t.tb_TuyenBay).Include(t => t.tb_DoiBay);
-            return View(tb_ChuyenBay.ToList());
-        }
+            int iPageNum = (page ?? 1);
+            int iPageSize = 2;        
+            return View(db.tb_ChuyenBay.ToList().OrderBy(n => n.MaChuyenBay).ToPagedList(iPageNum, iPageSize));
+        }    
 
         // GET: Admin/ChuyenBay/Details/5
         public ActionResult Details(int? id)

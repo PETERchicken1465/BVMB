@@ -27,13 +27,13 @@
         <AssociationConnector Association="BanVeMayBayModel.FK_tb_ChuyenBay_tb_TuyenBay" />
         <EntityTypeShape EntityType="BanVeMayBayModel.tb_NguoiDaiDien" Width="1.5" PointX="10.25" PointY="12.125" />
         <AssociationConnector Association="BanVeMayBayModel.FK_tb_NguoiDaiDien_tb_KhachHang1" />
+        <EntityTypeShape EntityType="BanVeMayBayModel.tb_DoiBay" Width="1.5" PointX="7.5" PointY="3.375" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_DoiBay_tb_ChuyenBay" />
+        <AssociationConnector Association="BanVeMayBayModel.FK_tb_NhanVien_tb_DoiBay" />
         <EntityTypeShape EntityType="BanVeMayBayModel.tb_DatVe" Width="1.5" PointX="12.5" PointY="9.875" />
         <AssociationConnector Association="BanVeMayBayModel.FK_tb_DatVe_tb_Ghe" />
         <AssociationConnector Association="BanVeMayBayModel.FK_tb_DatVe_tb_KhachHang" />
         <AssociationConnector Association="BanVeMayBayModel.FK_tb_DatVe_tb_NguoiDaiDien" />
-        <EntityTypeShape EntityType="BanVeMayBayModel.tb_DoiBay" Width="1.5" PointX="7.5" PointY="3.375" />
-        <AssociationConnector Association="BanVeMayBayModel.FK_tb_DoiBay_tb_ChuyenBay" />
-        <AssociationConnector Association="BanVeMayBayModel.FK_tb_NhanVien_tb_DoiBay" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -37,7 +37,7 @@ namespace DatVe.Models
         public virtual DbSet<tb_TuyenBay> tb_TuyenBay { get; set; }
         public virtual DbSet<tb_ChuyenBay> tb_ChuyenBay { get; set; }
         public virtual DbSet<tb_NguoiDaiDien> tb_NguoiDaiDien { get; set; }
-        public virtual DbSet<tb_DatVe> tb_DatVe { get; set; }
         public virtual DbSet<tb_DoiBay> tb_DoiBay { get; set; }
+        public virtual DbSet<tb_DatVe> tb_DatVe { get; set; }
     }
 }

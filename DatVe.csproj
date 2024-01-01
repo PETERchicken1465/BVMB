@@ -54,6 +54,9 @@
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -1986,7 +1989,6 @@
     <Content Include="Areas\Admin\Views\ChuyenBay\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDaiDien\Create.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDaiDien\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\NguoiDaiDien\Details.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDaiDien\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDaiDien\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DoiBay\Create.cshtml" />

@@ -51,7 +51,7 @@ namespace DatVe.Areas.Admin.Controllers
                     Session["TenDNAdmin"] = ad;
                     Session["ten"] = ad.TenNhanVien;
 
-                    return RedirectToAction("Index", "HomeAD");
+                    return RedirectToAction("Index", "NguoiDaiDien");
                 }
 
                 else
@@ -63,8 +63,7 @@ namespace DatVe.Areas.Admin.Controllers
             return View();
         }
         public ActionResult Logout()
-        {
-
+        {         
             Session.Abandon();
             ViewBag.Ten = "";
             return Redirect("Login");

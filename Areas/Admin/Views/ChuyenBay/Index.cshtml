@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DatVe.Models.tb_ChuyenBay>
+﻿@model PagedList.PagedList<DatVe.Models.tb_ChuyenBay>
 
 @{
     ViewBag.Title = "Index";
@@ -14,20 +14,20 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.tb_MayBay.LoaiMayBay)
+                    Loại Máy Bay
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.tb_TuyenBay.MaTuyenBay)
+                    Tuyến Bay
                 </th>
                 <th>
                     Ngày Cất cánh _ Hạ Cánh
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.TrangThai)
+                    Trạng Thái
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.tb_DoiBay.CoTruong)
+                    Cơ Trưởng
                 </th>
                 <th></th>
             </tr>
@@ -46,7 +46,7 @@
                         @Html.DisplayFor(modelItem => item.ThoiGianBay)_@Html.DisplayFor(modelItem => item.ThoiGianHaCanh)
                     </td>
 
-                    <td>                     
+                    <td>
                         <span style="@(item.TrangThai == true ? "color: green; font-weight: bold;" : "color: red; font-weight: normal;")">
                             @(item.TrangThai == true ? "Đã cất cánh" : "Đang chuẩn bị")
                         </span>
@@ -63,5 +63,42 @@
             }
 
         </table>
+        <nav class="text-center">
+            <div class="MenuTrang">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+            </div>
+
+            <div class="pagination">
+                @if (Model.PageNumber > 1)
+                {
+                    <a class="btn btn-default" href="@Url.Action("Index", new { page = 1 })"><<</a>
+                }
+                @for (var page = 1; page <= Model.PageCount; page++)
+                {
+                    <a class="btn @(Model.PageNumber == page ? "btn-primary" : "btn-default")" href="@Url.Action("Index", new { page = page })">@page</a>
+                }
+                @if (Model.PageNumber < Model.PageCount)
+                {
+                    <a class="btn btn-default" href="@Url.Action("Index", new { page = Model.PageCount })">>></a>
+                }
+            </div>
+
+
+            <style>
+                .MenuTrang {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                .pagination {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            </style>
+        </nav>
     </div>
+   
 </div>

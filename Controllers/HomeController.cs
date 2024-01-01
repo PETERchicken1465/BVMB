@@ -1,6 +1,11 @@
 ﻿using DatVe.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web.Mvc;
@@ -9,7 +14,7 @@ namespace DatVe.Controllers
 {
     public class HomeController : Controller
     {
-        private BanVeMayBayEntities db = new BanVeMayBayEntities();       
+        private BanVeMayBayEntities db = new BanVeMayBayEntities();
         public ActionResult Index()
         {
             List<tb_SanBay> sanBayList = GetSanBayList();
@@ -21,7 +26,7 @@ namespace DatVe.Controllers
         {
             return db.tb_SanBay.ToList();
 
-        }   
+        }
         public ActionResult TimChuyenBay()
         { return View(); }
         [HttpPost]
@@ -89,7 +94,7 @@ namespace DatVe.Controllers
             if (sp != null)
             {
                 sp.MaGhe = ghe;
-                string ngoi = string.Concat(DG, SG);
+                string ngoi = string.Concat(DG.Trim(), SG);
                 sp.ChoNgoi = ngoi;
             }
             var result = new
@@ -100,10 +105,13 @@ namespace DatVe.Controllers
             return Json(result);
         }
         #endregion
-
         #region DangKy
         public ActionResult DangKy()
         {
+            if (Session["GioHang"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
@@ -135,7 +143,7 @@ namespace DatVe.Controllers
             {
 
                 kh.HovaTen = HoTen;
-                Session["TaiKhoan"] = HoTen;               
+                Session["TaiKhoan"] = HoTen;
                 kh.GioiTinh = GT;
                 kh.Tuoi = int.Parse(tuoi);
                 kh.Email = sEmail;
@@ -188,7 +196,7 @@ namespace DatVe.Controllers
             return Json(result);
         }
 
-        public int TongSoLuong()     {          
+        public int TongSoLuong() {
             int dTongsl = 0;
             List<Giohang> lstGioHang = Session["GioHang"] as List<Giohang>;
             {
@@ -215,55 +223,57 @@ namespace DatVe.Controllers
         {
             List<Giohang> lstgiohang = LayGioHang();
             ViewBag.TongSoLuong = TongSoLuong();
-            ViewBag.TongTien = TongTien();           
+            ViewBag.TongTien = TongTien();
             return PartialView(lstgiohang);
         }
         #endregion
-        [HttpGet]
         public ActionResult DatHang()
-        {           
+        {
             if (Session["GioHang"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            List<Giohang> lstGioHang = LayGioHang();
+
             ViewBag.TongSoLuong = TongSoLuong();
             ViewBag.TongTien = TongTien();
-            return View(lstGioHang);
-        }
 
-        [HttpPost]
-        public ActionResult DatHang(FormCollection f)
-        {
-            // Thêm đơn hàng
-            tb_DatVe ddh = new tb_DatVe();
-            tb_KhachHang kh = (tb_KhachHang)Session["TaiKhoan"];
-            List<Giohang> lstGioHang = LayGioHang();
-
-            ddh.MaKH = kh.MaKhachHang;
-            ddh.NgayDat = DateTime.Now;
+            string x = Session["TaiKhoan"].ToString();
+            var NDD = db.tb_KhachHang.FirstOrDefault(nv => nv.HovaTen == x);
+            int CustomerID = NDD.MaKhachHang;
+            // Create New Order
+            tb_NguoiDaiDien ddh = new tb_NguoiDaiDien();
+            ddh.MaKH = CustomerID;
+            ddh.TenNguoiDaiDien = Session["TaiKhoan"].ToString();
+            ddh.TongTien = (int)TongTien();
+            ddh.SoLuong = (int)TongSoLuong();
+            db.tb_NguoiDaiDien.Add(ddh);
             db.SaveChanges();
+            System.Diagnostics.Debug.WriteLine($"ddh.MaNguoiDaiDien after reload: {ddh.MaNguoiDaiDien}");
+            db.Entry(ddh).Reload();
+            //string newndd = db.tb_NguoiDaiDien.OrderByDescending(n => n.MaNguoiDaiDien).FirstOrDefault().MaNguoiDaiDien.ToString();              
+            //List<Giohang> lstCart = LayGioHang();
+            //foreach (var item in lstCart)
+            //{
+            //    tb_DatVe order = new tb_DatVe();
+            //    order.MaGhe = item.MaGhe;
+            //    order.MaKH = Convert.ToInt32(CustomerID);
+            //    order.NgayDat = DateTime.Now;                 
+            //    order.MaNĐD = Convert.ToInt32(newndd);
+            //    order.SoGhe = 0;
 
-            // Thêm chi tiết đơn hàng
-            foreach (var item in lstGioHang)
-            {
-                tb_DatVe ctdh = new tb_DatVe();
-                ctdh.MaNĐD = ddh.MaKH;
-                ctdh.MaGhe = item.MaGhe;
-                ctdh.SoGhe = (int)item.Thanhtien;
+            //    db.tb_DatVe.Add(order);
+            //}
+            //db.SaveChanges();
 
-                db.tb_DatVe.Add(ctdh);
-            }
+            return RedirectToAction("XacNhanDonHang", "Home");        
+    } 
 
-            db.SaveChanges();
 
-            Session["GioHang"] = null;
 
-            return RedirectToAction("XacNhanDonHang");
-        }
+
         public ActionResult XacNhanDonHang()
         {
-
+          
             return View();
         }
     }
